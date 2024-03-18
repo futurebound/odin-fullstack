@@ -3,6 +3,14 @@
   src: url(./fonts/Norse-Bold.otf);
 }
 
+:root {
+  --primary-color: #596D48;
+  --secondary-color: #F9FAFB;
+  --tertiary-color: white;
+
+  --input-border-color: #E9EBEE;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -12,6 +20,7 @@
 
 body {
   display: flex;
+  background-color: var(--secondary-color);
 }
 
 .left-col {
@@ -32,7 +41,7 @@ body {
   align-items: center;
   justify-content: center;
 
-  padding: 10px;
+  padding: 16px;
   margin-top: 40%;
   background-color: rgba(0, 0, 0, 0.5);
 }
@@ -48,19 +57,73 @@ body {
 
 .img-credit {
   margin-top: auto;
-  margin-bottom: 10px;
+  margin-bottom: 16px;
   text-align: center;
 }
 
 
+/* ======================= RIGHT COLUMN ====================== */
 
 .right-col {
-  /* flex: 2; */
-
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-
-  padding-left: 20px;
 }
 
+.copy-text, .form-container > form, .submit-container {
+  padding-left: 48px;
+  padding-right: 160px;
+} 
+
+.copy-text {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.form-container {
+  /* min-width: 100%; */
+  padding-top: 32px;
+  padding-bottom: 48px;
+  background-color: white;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+.form-entry {
+  margin-top: 24px;
+  display: flex;
+  gap: 48px;
+}
+
+.form-left-col, .form-right-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-group {
+  width: 100%;
+}
+
+label {
+  font-weight: bold;
+  font-size: small;
+  letter-spacing: 2px;
+}
+
+input {
+  width: 100%;
+  font-size: large;
+  margin-top: 4px;
+  line-height: 36px;
+  padding-left: 8px;
+  border-radius: 8px;
+  border: 2px solid var(--input-border-color);
+}
+
+/* ======================== CREATE ACCOUNT ===================== */
+button {
+  color: var(--tertiary-color);
+  background-color: var(--primary-color);
+}
