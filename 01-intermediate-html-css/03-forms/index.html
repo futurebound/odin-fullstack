@@ -4,76 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Simple Form</title>
-
-  <style>
-    form {
-      /* Center the form on the page */
-      margin: 0 auto;
-      width: 400px;
-      /* Form outline */
-      padding: 1em;
-      border: 1px solid #ccc;
-      border-radius: 1em;
-    }
-
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    form li + li {
-      margin-top: 1em;
-    }
-
-    label {
-      /* Uniform size & alignment */
-      display: inline-block;
-      width: 90px;
-      text-align: right;
-    }
-
-    input,
-    textarea {
-      /* To make sure that all text fields have the same font settings
-        By default, textareas have a monospace font */
-      font: 1em sans-serif;
-
-      /* Uniform text field size */
-      width: 300px;
-      box-sizing: border-box;
-
-      /* Match form field borders */
-      border: 1px solid #999;
-    }
-
-    input:focus,
-    textarea:focus {
-      /* Additional highlight for focused elements */
-      border-color: #000;
-    }
-
-    textarea {
-      /* Align multiline text fields with their labels */
-      vertical-align: top;
-
-      /* Provide space to type some text */
-      height: 5em;
-    }
-
-    .button {
-      /* Align buttons with the text fields */
-      padding-left: 90px; /* same size as the label elements */
-    }
-
-    button {
-      /* This extra margin represent roughly the same space as the space
-        between the labels and their text fields */
-      margin-left: 0.5em;
-    }
-
-  </style>
-  
+  <link rel="stylesheet" href="./main.css">
 </head>
 <body>
   <form action="/my-handling-form-page" method="post">
@@ -185,5 +116,93 @@
       </p>
     </section>
   </form> 
+
+  <form>
+    <div>
+      <label for="choose">Would you prefer a banana or a cherry?</label>
+      <input
+        type="text"
+        id="choose"
+        name="i-like"
+        required
+        minlength="6"
+        maxlength="6" />
+    </div>
+    <div>
+      <label for="number">How many would you like?</label>
+      <input type="number" id="number" name="amount" value="1" min="1" max="10" />
+    </div>
+    <div>
+      <button>Submit</button>
+    </div>
+  </form>
+  
+  <form>
+    <fieldset>
+      <legend>
+        Do you have a driver's license?<span aria-label="required">*</span>
+      </legend>
+      <!-- While only one radio button in a same-named group can be selected at a time,
+           and therefore only one radio button in a same-named group having the "required"
+           attribute suffices in making a selection a requirement -->
+      <input type="radio" required name="driver" id="r1" value="yes" /><label
+        for="r1"
+        >Yes</label
+      >
+      <input type="radio" required name="driver" id="r2" value="no" /><label
+        for="r2"
+        >No</label
+      >
+    </fieldset>
+    <p>
+      <label for="n1">How old are you?</label>
+      <!-- The pattern attribute can act as a fallback for browsers which
+           don't implement the number input type but support the pattern attribute.
+           Please note that browsers that support the pattern attribute will make it
+           fail silently when used with a number field.
+           Its usage here acts only as a fallback -->
+      <input
+        type="number"
+        min="12"
+        max="120"
+        step="1"
+        id="n1"
+        name="age"
+        pattern="\d+" />
+    </p>
+    <p>
+      <label for="t1"
+        >What's your favorite fruit?<span aria-label="required">*</span></label
+      >
+      <input
+        type="text"
+        id="t1"
+        name="fruit"
+        list="l1"
+        required
+        pattern="[Bb]anana|[Cc]herry|[Aa]pple|[Ss]trawberry|[Ll]emon|[Oo]range" />
+      <datalist id="l1">
+        <option>Banana</option>
+        <option>Cherry</option>
+        <option>Apple</option>
+        <option>Strawberry</option>
+        <option>Lemon</option>
+        <option>Orange</option>
+      </datalist>
+    </p>
+    <p>
+      <label for="t2">What's your email address?</label>
+      <input type="email" id="t2" name="email" />
+    </p>
+    <p>
+      <label for="t3">Leave a short message</label>
+      <textarea id="t3" name="msg" maxlength="140" rows="5"></textarea>
+    </p>
+    <p>
+      <button>Submit</button>
+    </p>
+  </form>
+  
+  
 </body>
 </html>
