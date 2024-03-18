@@ -9,6 +9,7 @@
   --tertiary-color: white;
 
   --input-border-color: #E9EBEE;
+  --input-focus-color: blue;
 }
 
 * {
@@ -120,6 +121,13 @@ input {
   padding-left: 8px;
   border-radius: 8px;
   border: 2px solid var(--input-border-color);
+}
+
+input:focus{
+  /* outline: none; somehow needed to override default focus black
+      from an unknown source */
+  outline: none; 
+  border-color: var(--input-focus-color);
 }
 
 /* ======================== CREATE ACCOUNT ===================== */
