@@ -10,6 +10,8 @@
 
   --input-border-color: #E9EBEE;
   --input-focus-color: blue;
+  
+  --alert-color: red;
 }
 
 * {
@@ -86,7 +88,7 @@ body {
   /* min-width: 100%; */
   padding-top: 32px;
   padding-bottom: 48px;
-  background-color: white;
+  background-color: var(--tertiary-color);
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
 }
 
@@ -123,15 +125,35 @@ input {
   border: 2px solid var(--input-border-color);
 }
 
-input:focus{
+input:focus {
   /* outline: none; somehow needed to override default focus black
       from an unknown source */
   outline: none; 
   border-color: var(--input-focus-color);
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+input:invalid {
+  border: 2px solid var(--alert-color);
+  /* box-shadow: 0 0 5px 1px red; */
+}
+
+input:required:focus:valid {
+  border-color: var(--primary-color);
+}
+
+#matching {
+  color: var(--alert-color);
 }
 
 /* ======================== CREATE ACCOUNT ===================== */
 button {
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 12px 48px;
   color: var(--tertiary-color);
   background-color: var(--primary-color);
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
 }

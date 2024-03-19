@@ -23,48 +23,57 @@
         deepest dreams. Sign up <em>now</em> to get started.</h2>
       <h2>You <em>know</em> you want to.</h2>
     </div>
+
     <div class="form-container">
-      <form action="submit">
+      <form action="/my-handling-form-page" method="post">
         <h1>Let's do this!</h1>
         <div class="form-entry">
           <div class="form-left-col">
             <div class="form-group">
-              <label for="first-name"><p>FIRST NAME</p></label>
-              <input type="text" id="first-name" name="first-name" required />
+              <label for="first-name">FIRST NAME</label>
+              <input type="text" id="first-name" name="first-name"/>
             </div>
             <div class="form-group">
-              <label for="email"><p>EMAIL</p></label>
-              <input type="email" id="email" name="email" required />
+              <label for="email">EMAIL*</label>
+              <input type="email" id="email" name="email" required 
+                     placeholder="crab@crab.com"/>
             </div>
             <div class="form-group">
-              <label for="password"><p>PASSWORD</p></label>
-              <input type="password" id="password" name="password" required />
+              <label for="password">PASSWORD*</label>
+              <input type="password" id="password" name="password" required 
+                     minlength="8" maxlength="32" />
+              <span id="matching"></span>
             </div>
           </div>
 
           <div class="form-right-col">
             <div class="form-group">
-              <label for="last-name"><p>LAST NAME</p></label>
-              <input type="text" id="last-name" name="last-name" required />
+              <label for="last-name">LAST NAME</label>
+              <input type="text" id="last-name" name="last-name" />
             </div>
             <div class="form-group">
-              <label for="phone"><p>PHONE NUMBER</p></label>
-              <input type="tel" id="phone" name="phone" required />
+              <label for="phone">PHONE NUMBER</label>
+              <input type="tel" id="phone" name="phone" placeholder="(000)000-0000"/>
             </div>
             <div class="form-group">
-              <label for="password-confirm"><p>CONFIRM PASSWORD</p></label>
-              <input type="password" id="password-confirm" name="password-confirm" required />
+              <label for="confirm-password">CONFIRM PASSWORD*</label>
+              <input type="password" id="confirm-password" name="confirm-password" required 
+                     minlength="8" maxlength="32"  />
             </div>
           </div>
         </div>
+
+        
       </form>
     </div>
+
     <div class="submit-container">
       <button type="submit">Create Account</button>
       <p>Already have an account? <a href="#">Log In</a></p>
     </div>
   </div>
 
+  <script src="./script.js"></script>
 </body>
 
 </html>
