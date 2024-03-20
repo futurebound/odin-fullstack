@@ -1,0 +1,14 @@
+
+
+
+:root {
+  --primary-color: #1992D4;
+}
+
+.container {
+  display: grid;
+}
+
+.panel {
+  background-color: var(--primary-color);
+}
