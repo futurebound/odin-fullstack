@@ -15,7 +15,14 @@
   --secondary: #FFFFFF;
   --tertiary: #E2E8F0;
 
-  --primary-accent: #EFB42B;
+  --accent-primary: #EFB42B;
+
+  --font-primary: black;
+  --font-secondary: white;
+  --font-tertiary: #636363;
+
+  --icon-width: 20px;
+  --icon-height: 20px;
 }
 
 /* ======================= GLOBAL STYLES ======================== */
@@ -34,7 +41,7 @@ li {
 }
 
 button {
-  color: var(--secondary);
+  color: var(--font-secondary);
   background-color: var(--primary);
   border: none;
   padding: 8px 24px;
@@ -48,7 +55,7 @@ button {
   grid-template-columns: 1fr 1.2fr 1.2fr 1fr;
 }
 
-.panel {
+.sidebar {
   background-color: var(--primary);
   grid-column: 1 / 2;
   /* grid-row: 1 / -1; */
@@ -59,11 +66,11 @@ button {
 
   padding: 16px;
   font-weight: bold;
-  color: var(--secondary);
+  color: var(--font-secondary);
 }
 
 /* change color of all panel SVGs to white */
-.panel path {
+.sidebar path {
   fill: var(--secondary);
 }
 
@@ -95,8 +102,8 @@ button {
 
 .nav svg,
 .settings svg {
-  width: 20px;
-  height: 20px;
+  width: var(--icon-width);
+  height: var(--icon-height);
   justify-self: center;
 }
 
@@ -125,6 +132,8 @@ button {
   /* grid-column: 1 / 2; */
 }
 
+/* ============================ PROJECTS ========================== */
+
 .projects-container {
   background-color: var(--tertiary);
   padding-top: 24px;
@@ -134,13 +143,53 @@ button {
 }
 
 .projects {
-  padding-top: 8px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 16px;
 }
 
-.sidebar {
+.card {
+  padding: 24px 16px;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  position: relative;
+  min-height: 200px;
+  background-color: var(--secondary);
+  border-radius: 8px;
+  border-left: 8px solid var(--accent-primary);
+}
+
+.card h3 {
+  font-size: medium;
+}
+
+.card p {
+  color: var(--font-tertiary);
+  margin-top: 4px;
+  font-size: medium;
+}
+
+/* push content to right of container with fixed right margin */
+.card-icons {
+  margin-left: auto;
+  margin-right: 16px;
+}
+
+.card-icons svg {
+  width: var(--icon-width);
+  height: var(--icon-height);
+  margin-left: 24px;
+}
+
+.projects-container>h2,
+.announcements-container>h2,
+.trending-container>h2 {
+  font-size: large;
+  margin-bottom: 8px;
+}
+
+/* ============================ PANEL RIGHT ========================== */
+.panel-right {
   background-color: var(--tertiary);
   padding-right: 24px;
   padding-top: 24px;
@@ -148,12 +197,6 @@ button {
   display: grid;
   gap: 32px;
   grid-template-rows: 1fr 1fr;
-}
-
-.card {
-  background-color: var(--secondary);
-  border-radius: 8px;
-  border-left: 4px solid var(--primary-accent);
 }
 
 .announcements,
