@@ -1,8 +1,13 @@
+@font-face {
+  font-family: roboto;
+  src: url(./fonts/Roboto-Regular.ttf);
+}
 
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; 
+  box-sizing: border-box;
+  font-family: roboto, sans-serif;
 }
 
 :root {
@@ -19,8 +24,8 @@ li {
 }
 
 .icon {
-  width: 16px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
 }
 
 .profile-img {
@@ -36,10 +41,11 @@ button {
   border-radius: 16px;
 }
 
-/* ======================= LAYOUT STYLES ======================== */
+
+/* =========================== PANEL ============================ */
 .container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 1fr 1.2fr 1.2fr 1fr;
 }
 
 .panel {
@@ -48,8 +54,62 @@ button {
   /* grid-row: 1 / -1; */
   grid-row-start: 1;
   grid-row-end: 4;
+
+  /* display: grid; */
+
+  padding: 16px;
+  font-weight: bold;
+  color: var(--secondary);
 }
 
+/* change color of all panel SVGs to white */
+.panel path {
+  fill: var(--secondary);
+}
+
+.logo,
+.nav,
+.settings {
+  gap: 8px;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+
+.logo svg {
+  width: 40px;
+  height: 40px;
+  justify-self: center;
+}
+
+.logo span {
+  display: grid;
+  font-size: x-large;
+  align-items: center;
+}
+
+.nav,
+.settings {
+  margin-top: 48px;
+  font-size: large;
+}
+
+.nav svg,
+.settings svg {
+  width: 20px;
+  height: 20px;
+  justify-self: center;
+}
+
+.nav {
+  grid-template-rows: repeat(6, 32px);
+}
+
+.settings {
+  grid-template-rows: repeat(3, 32px);
+}
+
+
+/* ============================ HEADER ========================== */
 .header {
   background-color: var(--secondary);
   grid-column: 2 / -1;
@@ -66,13 +126,15 @@ button {
 }
 
 .projects-container {
-  grid-column: 2 / 4;
   background-color: var(--tertiary);
+  padding-top: 24px;
+  padding-left: 16px;
+  padding-right: 16px;
+  grid-column: 2 / 4;
 }
 
 .projects {
-  padding: 16px;
-
+  padding-top: 8px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
@@ -80,6 +142,9 @@ button {
 
 .sidebar {
   background-color: var(--tertiary);
+  padding-right: 24px;
+  padding-top: 24px;
+
   display: grid;
   gap: 32px;
   grid-template-rows: 1fr 1fr;
@@ -91,8 +156,12 @@ button {
   border-left: 4px solid var(--primary-accent);
 }
 
-.announcements > div, .trending > div {
+.announcements,
+.trending {
   border-radius: 8px;
   background-color: var(--secondary);
   padding: 16px;
 }
+
+.announcement,
+.trending-user {}
