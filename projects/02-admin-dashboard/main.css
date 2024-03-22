@@ -31,8 +31,8 @@ li {
 }
 
 .icon {
-  width: 24px;
-  height: 24px;
+  width: var(--icon-width);
+  height: var(--icon-height);
 }
 
 .profile-img {
@@ -46,12 +46,14 @@ button {
   border: none;
   padding: 8px 24px;
   border-radius: 16px;
+  font-weight: bold;
 }
 
 .container {
   height: 100vh;
   display: grid;
   grid-template-columns: 1fr 1.2fr 1.2fr 1fr;
+  grid-template-rows: max-content;
 }
 
 
@@ -120,20 +122,72 @@ button {
 
 /* ============================ HEADER ========================== */
 .header {
+  gap: 16px;
+  padding: 16px 32px;
   display: grid;
   grid-column: 2 / -1;
-  grid-template: 1fr 1fr / 2fr 1fr;
+  grid-template-columns: 2fr 1fr;
+  /* grid-template-rows: 50px 50px; */
   background-color: var(--secondary);
   box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.2);
 }
 
 .search {
   /* grid-column: 1 / -1; */
+  /* display: grid; */
+  /* grid-template-columns: 1fr fr; */
+  display: grid;
+  grid-template-columns: 24px auto;
+  align-items: center;
+}
+
+.search input {
+  background: var(--tertiary);
+  border: none;
+  border-radius: 24px;
+  height: calc(var(--icon-height) + 12px);
+  padding-left: 12px;
+}
+
+.profile {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(3, auto);
+  align-items: center;
+  margin-left: auto;
+  font-weight: bold;
 }
 
 .greeting {
-  /* grid-column: 1 / 2; */
+  /* margin-left: 48px; */
+  display: grid;
+  gap: 16px;;
+  font-weight: bold;
+  grid-template-columns: auto 7fr;
+  align-items: center;
 }
+
+.greeting h1 {
+  font-size: x-large;
+  margin-top: 4px;
+}
+
+.hero-profile-img {
+  border-radius: 50%;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: repeat(3, max-content);
+  grid-template-rows: max-content;
+  margin-left: auto;
+  margin-top: 24px;
+}
+
+.actions button {
+  margin-left: 24px;
+}
+
 
 /* ============================ PROJECTS ========================== */
 
@@ -155,7 +209,6 @@ button {
   padding: 24px 16px;
   display: grid;
   grid-template-rows: 1fr auto;
-  position: relative;
   min-height: 200px;
   background-color: var(--secondary);
   border-radius: 8px;
@@ -244,7 +297,7 @@ button {
 }
 
 .trending {
-  padding: 32px;
+  padding: 24px;
   display: grid;
   grid-template-columns: 1fr 3fr;
   gap: 16px;
@@ -253,7 +306,8 @@ button {
 .profile-img {
   width: 48px;
   height: 48px;
-  border-radius: 50%; /* circular image */
+  border-radius: 50%;
+  /* circular image */
   /* align-self: center; */
 }
 
