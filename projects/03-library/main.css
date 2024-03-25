@@ -5,6 +5,10 @@ body {
   margin: 0;
 }
 
+form input {
+  margin-left: auto;
+}
+
 .container {
   padding: 24px;
   display: grid;
@@ -18,11 +22,38 @@ body {
   padding: 8px;
 }
 
-.deleteBtn {
+.read {
+  background-color: lightgreen;
+}
+
+.not-read {
+  background-color: salmon;
+}
+
+.toggle-button, .delete-button {
   color: white;
   font-weight: bold;
-  background-color: red;
   border: none;
   border-radius: 8px;
   padding: 8px 16px;
+}
+
+.toggle-button {
+  background-color: blue;
+}
+
+.delete-button {
+  background-color: red;
+  margin-left: auto;
+}
+
+.modal::backdrop {
+  background-image: linear-gradient(
+    45deg,
+    magenta,
+    rebeccapurple,
+    dodgerblue,
+    green
+  );
+  opacity: 0.75;
 }

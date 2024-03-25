@@ -8,10 +8,36 @@
 </head>
 <body>
   <h1>Library</h1>
-  <button class="new-book">NEW BOOK</button>
-  <dialog class="new-form">
-    <form method="dialog">
-      
+  <button class="open-button">NEW BOOK</button>
+  <dialog class="modal">
+    <form id="modal-form" method="dialog">
+      <p>
+        <label for="title">
+          Title:
+          <input type="text" name="title" required>
+        </label>
+      </p>
+      <p>
+        <label for="author">
+          Author:
+          <input type="text" name="author" required>
+        </label>
+      </p>
+      <p>
+        <label for="pages">
+          Number of Pages:
+          <input type="number" name="pages" required>
+        </label>
+      </p>
+      <p>
+        <label for="read">
+          Have you read this book?
+          <input type="checkbox" name="read" required>
+        </label>
+      </p>
+      <!-- <input type="submit" value="Normal Close"> -->
+      <!-- <button type="submit" class="close-button">CANCEL</button> -->
+      <button type="submit" class="submit-button">SUBMIT</button>
     </form>
   </dialog>
   <div class="container">
