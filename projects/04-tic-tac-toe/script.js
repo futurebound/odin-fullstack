@@ -7,6 +7,20 @@ function Gameboard() {
   let moves = 0;
   const MAX_MOVES = 9;
 
+  function Cell() {
+    let value = 0;
+  
+    const addMove = (player) => {
+      value = player;
+    };
+  
+    const getValue = () => value;
+  
+    return {
+      addMove, getValue
+    };
+  }
+
   // initialize empty board as 3x3 matrix with Cells
   for (let row = 0; row < rows; row++) {
     board[row] = [];
