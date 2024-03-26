@@ -6,6 +6,7 @@ function Gameboard() {
   const board = [];
   let moves = 0;
   const MAX_MOVES = 9;
+  let gameIsOver = false;
 
   function Cell() {
     let value = 0;
@@ -30,6 +31,7 @@ function Gameboard() {
   }
 
   const getBoard = () => board;
+  const getGameOver = () => gameIsOver;
 
   const printBoard = () => {
     const boardByRow = board.map((row) => row.map((cell) => cell.getValue()));
@@ -55,6 +57,7 @@ function Gameboard() {
       if (currentRow[0].getValue() !== 0 
           && currentRow[0].getValue() === currentRow[1].getValue() 
           && currentRow[1].getValue() === currentRow[2].getValue()) {
+        gameIsOver = true;  
         return currentRow[0].getValue();
       }
     }
@@ -64,6 +67,7 @@ function Gameboard() {
       if (board[0][col].getValue() != 0 
           && board[0][col].getValue() === board[1][col].getValue() 
           && board[1][col].getValue() === board[2][col].getValue()) {
+        gameIsOver = true;  
         return board[0][col].getValue();
       }
     }
@@ -72,20 +76,31 @@ function Gameboard() {
     if (board[0][0].getValue() !== 0
         && board[0][0].getValue() === board[1][1].getValue()
         && board[1][1].getValue() === board[2][2].getValue()) {
+      gameIsOver = true; 
       return board[0][0].getValue();
     
     } else if (board[2][0].getValue() !== 0
         && board[2][0].getValue() === board[1][1].getValue()
         && board[1][1].getValue() === board[0][2].getValue()) {
-      return board[2][0].getvalue();
+      gameIsOver = true; 
+      return board[2][0].getValue();
     }
 
     // no player winner, now check for tie state
-    return moves === MAX_MOVES ? 0 : -1;
+    if (moves === MAX_MOVES) {
+      gameIsOver = true; 
+      return 0;
+    } else {
+      return -1;
+    }
   };
 
   return {
-    getBoard, printBoard, makeMove, checkGameEnd
+    getBoard,
+    getGameOver,
+    printBoard,
+    makeMove, 
+    checkGameEnd
   };
 }
 
@@ -122,15 +137,17 @@ function GameController(
     board.printBoard();
     if (winner === 0) {
       console.log(`The game ends in a tie!`);
+      return `The game ends in a tie!`;
     } else if (winner === 1) {
       console.log(`${players[0].name} has won the game!`);
+      return `${players[0].name} has won the game!`;
     } else if (winner === 2) {
       console.log(`${players[1].name} has won the game!`);
+      return `${players[1].name} has won the game!`;
     }
   }
 
   const playRound = (row, col) => {
-    console.log(``)
     board.makeMove(row, col, getActivePlayer().token);
 
     // check for winner
@@ -149,7 +166,10 @@ function GameController(
   return {
     playRound, 
     getActivePlayer,
-    getBoard: board.getBoard
+    printGameEnd,
+    getBoard: board.getBoard,
+    getGameOver: board.getGameOver,
+    checkGameEnd: board.checkGameEnd
   };
 }
 
@@ -158,6 +178,8 @@ function ScreenController() {
 
   const turnDiv = document.querySelector(".turn");
   const boardDiv = document.querySelector(".board");
+  const winnerModal = document.querySelector(".winner-modal");
+  const winnerDisplay = document.querySelector(".winner-display");
 
   const updateScreen = () => {
     boardDiv.replaceChildren(); // clear boardstate
@@ -176,7 +198,14 @@ function ScreenController() {
 
         const cellValue = cell.getValue();
         if (cellValue > 0) {
-          cellButton.textContent = cellValue === 1 ? "X" : "O";
+          if (cellValue === 1) {
+            cellButton.textContent = "X";
+            cellButton.classList.add("player-one");
+          } else {
+            cellButton.textContent = "O";
+            cellButton.classList.add("player-two");
+          }
+          // cellButton.textContent = cellValue === 1 ? "X" : "O";
           cellButton.classList.replace("active", "inactive")
         } 
 
@@ -194,9 +223,35 @@ function ScreenController() {
         boardDiv.appendChild(cellButton);
       })
     });
+
+    displayGameOver();
   }
 
+  const displayGameOver = () => {
+    const winner = game.checkGameEnd()
+    if (winner > 0) {
+      winnerModal.showModal();
+      winnerDisplay.textContent = game.printGameEnd(winner);
+    }
+  }
+
+  // initial screen rendering
   updateScreen();
 }
+
+
+const modal = document.querySelector(".modal");
+const openModal = document.querySelector(".open-button");
+const closeModal = document.querySelector(".start-button");
+
+openModal.addEventListener("click", () => {
+  modal.showModal();
+});
+
+closeModal.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  modal.close();
+});
 
 ScreenController();

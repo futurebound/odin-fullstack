@@ -1,3 +1,7 @@
+:root {
+  --player-one: red;
+  --player-two: blue;
+}
 
 * {
   margin: 0;
@@ -34,9 +38,36 @@ body {
   font-size: 100px;
 }
 
+.player-one {
+  color: var(--player-one);
+  border-color: var(--player-one);
+}
+
+.player-two {
+  color: var(--player-two);
+  border-color: var(--player-two);
+}
+
 .active:hover {
   color: #d710ff;
   box-shadow: 0 0 5px #d710ff;
   text-shadow: 0 0 5px #d710ff;
   border-color: #d710ff;
+}
+
+.modal {
+  text-align: center;
+  position: absolute;
+  margin: auto;
+}
+
+.modal::backdrop {
+  background-image: linear-gradient(
+    45deg,
+    magenta,
+    rebeccapurple,
+    dodgerblue,
+    green
+  );
+  opacity: 0.75;
 }

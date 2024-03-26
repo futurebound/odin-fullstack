@@ -10,8 +10,33 @@
   <div class="info">
     <h1>Tic Tac Toe</h1>
     <div class="turn"></div>
+    <button class="open-button">NEW GAME</button>
   </div>
+
   <div class="board"></div>
+
+  <dialog class="modal">
+    <form id="modal-form" method="dialog">
+      <p>
+        <label for="name">
+          Player 1 Name:
+          <input type="text" name="player-one-name" required>
+        </label>
+      </p>
+      <p>
+        <label for="name">
+          Player 2 Name:
+          <input type="text" name="player-two-name" required>
+        </label>
+      </p>
+    </form>
+    <button type="submit" class="start-button">START GAME</button>
+  </dialog>
+
+  <dialog class="winner-modal">
+    <div class="winner-display"></div>
+  </dialog>
+
   <script src="./script.js"></script>
 </body>
 </html>
