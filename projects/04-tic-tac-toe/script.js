@@ -89,22 +89,6 @@ function Gameboard() {
   };
 }
 
-
-function Cell() {
-  let value = 0;
-
-  const addMove = (player) => {
-    value = player;
-  };
-
-  const getValue = () => value;
-
-  return {
-    addMove, getValue
-  };
-}
-
-
 function GameController(
   playerOneName = "P1",
   playerTwoName = "P2"
@@ -163,8 +147,56 @@ function GameController(
   printRoundInfo();
 
   return {
-    playRound, getActivePlayer
+    playRound, 
+    getActivePlayer,
+    getBoard: board.getBoard
   };
 }
 
-const game = GameController();
+function ScreenController() {
+  const game = GameController();
+
+  const turnDiv = document.querySelector(".turn");
+  const boardDiv = document.querySelector(".board");
+
+  const updateScreen = () => {
+    boardDiv.replaceChildren(); // clear boardstate
+    // boardDiv.textContent = ""; // clear boardstate
+    const board = game.getBoard();
+    const activePlayer = game.getActivePlayer();
+    turnDiv.textContent = `${activePlayer.name}'s turn`;
+
+    // console.log(board)
+    board.forEach((row, rowIndex) => {
+      row.forEach((cell, colIndex) => {
+        const cellButton = document.createElement("button");
+        cellButton.dataset.row = rowIndex;
+        cellButton.dataset.column = colIndex;
+        cellButton.classList.add("cell", "active");
+
+        const cellValue = cell.getValue();
+        if (cellValue > 0) {
+          cellButton.textContent = cellValue === 1 ? "X" : "O";
+          cellButton.classList.replace("active", "inactive")
+        } 
+
+        // only add event listeners to active buttons
+        if (cellButton.classList.contains("active")) {
+          cellButton.addEventListener("click", (e) => {
+            const selectedCell = e.target;
+            console.log(selectedCell)
+            // console.log(selectedCell.dataset.row)
+            game.playRound(selectedCell.dataset.row, selectedCell.dataset.column);
+            updateScreen();
+          });
+        }
+
+        boardDiv.appendChild(cellButton);
+      })
+    });
+  }
+
+  updateScreen();
+}
+
+ScreenController();
