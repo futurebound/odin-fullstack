@@ -183,7 +183,6 @@ function ScreenController() {
 
   const turnDiv = document.querySelector(".turn");
   const boardDiv = document.querySelector(".board");
-  const resetButton = document.querySelector(".open-button");
   const winnerModal = document.querySelector(".winner-modal");
   const winnerDisplay = document.querySelector(".winner-display");
 
@@ -246,8 +245,6 @@ function ScreenController() {
     updateScreen();
   }
 
-  resetButton.addEventListener("click", resetScreen);
-
   openModal.forEach(openButton => {
     openButton.addEventListener("click", () => {
       modal.showModal();
@@ -263,8 +260,8 @@ function ScreenController() {
     winnerModal.close();
   });
 
-  // initial screen rendering
-  updateScreen();
+  // initial screen by triggering user name input
+  document.addEventListener("DOMContentLoaded", modal.showModal());
 }
 
 
