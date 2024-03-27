@@ -10,15 +10,16 @@ function Gameboard() {
 
   function Cell() {
     let value = 0;
-  
+
     const addMove = (player) => {
       value = player;
     };
-  
+
     const getValue = () => value;
-  
+
     return {
-      addMove, getValue
+      addMove,
+      getValue
     };
   }
 
@@ -54,41 +55,41 @@ function Gameboard() {
     // rows
     for (let row = 0; row < rows; row++) {
       const currentRow = board[row];
-      if (currentRow[0].getValue() !== 0 
-          && currentRow[0].getValue() === currentRow[1].getValue() 
-          && currentRow[1].getValue() === currentRow[2].getValue()) {
-        gameIsOver = true;  
+      if (currentRow[0].getValue() !== 0
+        && currentRow[0].getValue() === currentRow[1].getValue()
+        && currentRow[1].getValue() === currentRow[2].getValue()) {
+        gameIsOver = true;
         return currentRow[0].getValue();
       }
     }
 
     // cols
     for (let col = 0; col < columns; col++) {
-      if (board[0][col].getValue() != 0 
-          && board[0][col].getValue() === board[1][col].getValue() 
-          && board[1][col].getValue() === board[2][col].getValue()) {
-        gameIsOver = true;  
+      if (board[0][col].getValue() != 0
+        && board[0][col].getValue() === board[1][col].getValue()
+        && board[1][col].getValue() === board[2][col].getValue()) {
+        gameIsOver = true;
         return board[0][col].getValue();
       }
     }
 
     // diagonals
     if (board[0][0].getValue() !== 0
-        && board[0][0].getValue() === board[1][1].getValue()
-        && board[1][1].getValue() === board[2][2].getValue()) {
-      gameIsOver = true; 
+      && board[0][0].getValue() === board[1][1].getValue()
+      && board[1][1].getValue() === board[2][2].getValue()) {
+      gameIsOver = true;
       return board[0][0].getValue();
-    
+
     } else if (board[2][0].getValue() !== 0
-        && board[2][0].getValue() === board[1][1].getValue()
-        && board[1][1].getValue() === board[0][2].getValue()) {
-      gameIsOver = true; 
+      && board[2][0].getValue() === board[1][1].getValue()
+      && board[1][1].getValue() === board[0][2].getValue()) {
+      gameIsOver = true;
       return board[2][0].getValue();
     }
 
     // no player winner, now check for tie state
     if (moves === MAX_MOVES) {
-      gameIsOver = true; 
+      gameIsOver = true;
       return 0;
     } else {
       return -1;
@@ -99,7 +100,7 @@ function Gameboard() {
     getBoard,
     getGameOver,
     printBoard,
-    makeMove, 
+    makeMove,
     checkGameEnd
   };
 }
@@ -121,7 +122,7 @@ function GameController(
   ];
 
   let activePlayer = players[0];
-  
+
   const getActivePlayer = () => activePlayer;
 
   const switchPlayerTurn = () => {
@@ -164,7 +165,7 @@ function GameController(
   printRoundInfo();
 
   return {
-    playRound, 
+    playRound,
     getActivePlayer,
     printGameEnd,
     getBoard: board.getBoard,
@@ -174,10 +175,15 @@ function GameController(
 }
 
 function ScreenController() {
-  const game = GameController();
+  let game = GameController();
+
+  const modal = document.querySelector(".modal");
+  const openModal = document.querySelectorAll(".open-button");
+  const startButton = document.querySelector(".start-button");
 
   const turnDiv = document.querySelector(".turn");
   const boardDiv = document.querySelector(".board");
+  const resetButton = document.querySelector(".open-button");
   const winnerModal = document.querySelector(".winner-modal");
   const winnerDisplay = document.querySelector(".winner-display");
 
@@ -207,7 +213,7 @@ function ScreenController() {
           }
           // cellButton.textContent = cellValue === 1 ? "X" : "O";
           cellButton.classList.replace("active", "inactive")
-        } 
+        }
 
         // only add event listeners to active buttons
         if (cellButton.classList.contains("active")) {
@@ -235,23 +241,31 @@ function ScreenController() {
     }
   }
 
+  const resetScreen = (playerOneName = "p11", playerTwoName = "p22") => {
+    game = GameController(playerOneName, playerTwoName);
+    updateScreen();
+  }
+
+  resetButton.addEventListener("click", resetScreen);
+
+  openModal.forEach(openButton => {
+    openButton.addEventListener("click", () => {
+      modal.showModal();
+    });
+  })
+  
+  startButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    const playerOneName = document.querySelector("#player-one-name").value;
+    const playerTwoName = document.querySelector("#player-two-name").value;
+    resetScreen(playerOneName, playerTwoName);
+    modal.close();
+    winnerModal.close();
+  });
+
   // initial screen rendering
   updateScreen();
 }
 
-
-const modal = document.querySelector(".modal");
-const openModal = document.querySelector(".open-button");
-const closeModal = document.querySelector(".start-button");
-
-openModal.addEventListener("click", () => {
-  modal.showModal();
-});
-
-closeModal.addEventListener("click", (e) => {
-  e.preventDefault();
-
-  modal.close();
-});
 
 ScreenController();
