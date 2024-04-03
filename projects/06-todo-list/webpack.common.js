@@ -9,7 +9,7 @@ module.exports = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Production',
+      template: './src/index.html',
     }),
   ],
 
@@ -19,4 +19,12 @@ module.exports = {
     clean: true,
   },
 
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
+  },
 };
