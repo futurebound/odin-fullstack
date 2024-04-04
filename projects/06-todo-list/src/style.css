@@ -1,0 +1,24 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#container {
+  display: grid;
+  grid-template-columns: 1fr 2.5fr;
+}
+
+.sidebar, .content {
+  border: 2px solid black;
+  height: 100vh;
+}
+
+.sidebar {
+  background-color: gray;
+}
+
+.content {
+  background-color: aqua;
+}
