@@ -21,4 +21,19 @@
 
 .content {
   background-color: aqua;
+  padding: 48px 72px;
+}
+
+.project h2 {
+  margin-bottom: 24px;
+}
+
+.tasks {
+  display: grid;
+  gap: 12px;
+  border: 2px solid black;
+}
+
+.task {
+  border: 2px solid red;
 }

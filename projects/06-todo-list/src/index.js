@@ -14,7 +14,8 @@ const containerDiv = document.getElementById("container");
 const sidebarDiv = renderSidebar();
 const contentDiv = renderContent();
 
-
+// on initial page load (likely changes with localstorage)
+//  we want to load the "default" project
 
 
 containerDiv.appendChild(sidebarDiv);
