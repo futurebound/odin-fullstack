@@ -1,6 +1,5 @@
 "use strict";
 
-import Task from "./Task.js";
 
 class Project {
   constructor(title, description, tasks=[]) {
@@ -9,8 +8,20 @@ class Project {
     this.tasks = tasks;
   }
 
+  getTitle() {
+    return this.title;
+  }
+
+  getDescription() {
+    return this.description;
+  }
+
   addTask(task) {
-    this.tasks.push(task);
+    this.tasks.unshift(task);
+  }
+
+  removeTask(index) {
+    this.tasks = this.tasks.toSpliced(index, 1);
   }
 }
 

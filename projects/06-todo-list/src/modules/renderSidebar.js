@@ -7,6 +7,9 @@ const renderSidebar = () => {
   sidebarTitle.textContent = "Sidebar";
   sidebarDiv.appendChild(sidebarTitle);
 
+  // for each Project
+    // display Project.title with a click listener to render that project
+
   return sidebarDiv;
 }
 

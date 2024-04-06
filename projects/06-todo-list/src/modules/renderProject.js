@@ -8,13 +8,13 @@ const renderProject = (project) => {
   projectDiv.classList.add("project");
 
   const title = document.createElement("h2");
-  title.textContent = project.title;
+  title.textContent = project.getTitle();
 
   const tasksDiv = document.createElement("div");
   tasksDiv.classList.add("tasks");
   const tasks = project.tasks;
   tasks.forEach(task => {
-    console.log(task);
+    // console.log(task);
     const taskDiv = renderTask(task);
     tasksDiv.appendChild(taskDiv);
   });

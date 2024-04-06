@@ -17,7 +17,43 @@
 
 .sidebar {
   background-color: gray;
+  padding: 12px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
+
+.sidebar-project {
+  width: 100%;
+  background-color: white;
+  border-radius: 8px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar-project:hover {
+  background-color: red;
+}
+
+.sidebar-project .delete-button {
+  margin-left: auto;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+}
+
+.delete-button:hover {
+  fill: red;
+  background-color: black;
+}
+
+.sidebar-project svg {
+  width: 24px;
+  height: 24px;
+}
+
 
 .content {
   background-color: aqua;
@@ -36,4 +72,11 @@
 
 .task {
   border: 2px solid red;
+  background-color: white;
+  border-radius: 8px;
+  padding: 8px 16px;
+}
+
+.complete {
+  background-color: lightgreen;
 }

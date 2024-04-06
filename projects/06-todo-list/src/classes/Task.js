@@ -1,7 +1,13 @@
 "use strict";
 
 class Task {
-  constructor(title, dueDate = null, priority = null, project = null, complete = false) {
+  constructor(
+    title,
+    dueDate = null,
+    priority = null, 
+    project = null,
+    complete = false
+  ) {
     this.title = title;
     // this.description = description;
     this.dueDate = dueDate;
@@ -19,6 +25,10 @@ class Task {
     this.title = title;
   }
 
+  hasDueDate() {
+    return this.dueDate !== null;
+  }
+
   getDueDate() {
     return this.dueDate;
   }
@@ -33,6 +43,10 @@ class Task {
   
   isComplete() {
     return this.complete;
+  }
+
+  setComplete(status) {
+    this.complete = status;
   }
 
   toggleComplete() {
