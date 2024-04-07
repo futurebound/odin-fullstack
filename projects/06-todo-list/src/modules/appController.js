@@ -3,7 +3,7 @@
 // import renderProject from "./renderProject";
 import Project from "../classes/Project";
 import Task from "../classes/Task";
-import renderTask from "./renderTask";
+// import renderTask from "./renderTask";
 
 // import renderSidebar from './renderSidebar';
 // import renderContent from './renderContent';
@@ -58,7 +58,7 @@ const renderProject = (project) => {
   const projectDiv = document.createElement("div");
   projectDiv.classList.add("project");
 
-  const title = document.createElement("h2");
+  const title = document.createElement("h1");
   title.textContent = project.getTitle();
 
   const taskForm = createTaskForm();
@@ -66,17 +66,66 @@ const renderProject = (project) => {
   const tasksDiv = document.createElement("div");
   tasksDiv.classList.add("tasks");
   const tasks = project.tasks;
-  tasks.forEach(task => {
-    // console.log(task);
+  tasks.forEach((task, taskIndex) => {
     const taskDiv = renderTask(task);
+    taskDiv.dataset.index = taskIndex;
     tasksDiv.appendChild(taskDiv);
   });
 
   projectDiv.appendChild(title);
   projectDiv.appendChild(taskForm);
   projectDiv.appendChild(tasksDiv);
-
   return projectDiv;
+}
+
+const renderTask = (task) => {
+  const taskDiv = document.createElement("div");
+  taskDiv.classList.add("task");
+  if (task.isComplete()) {
+    taskDiv.classList.add("complete");
+  } else {
+    taskDiv.classList.add("incomplete");
+  }
+
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.addEventListener("change", () => {
+    if (checkbox.checked) {
+      task.setComplete(true);
+      taskDiv.classList.replace("incomplete", "complete");
+    } else {
+      task.setComplete(false);
+      taskDiv.classList.replace("complete", "incomplete");
+    }
+    task.toggleComplete();
+  });
+  taskDiv.appendChild(checkbox);
+
+  const title = document.createElement("span");
+  title.classList.add("task-title");
+  title.textContent = task.getTitle();
+  taskDiv.appendChild(title);
+
+  if (task.hasDueDate()) {
+    const dueDate = document.createElement("p");
+    dueDate.textContent = task.getDueDate();
+    taskDiv.appendChild(dueDate);
+  }
+
+  const deleteButton = document.createElement("button");
+  deleteButton.classList.add("delete-button");
+  deleteButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>delete-outline</title><path d="M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19M8,9H16V19H8V9M15.5,4L14.5,3H9.5L8.5,4H5V6H19V4H15.5Z" /></svg>`;
+  deleteButton.addEventListener("click", (e) => {
+    e.stopPropagation(); // prevent click listener on parent div from firing
+    const targetIndex = e.currentTarget.parentElement.dataset.index; // e.currentTarget only focuses on event listener element
+    currentProject.deleteTask(targetIndex);
+    renderApp();
+  });
+
+  taskDiv.appendChild(deleteButton);
+
+
+  return taskDiv;
 }
 
 const createTaskForm = () => {
@@ -86,13 +135,12 @@ const createTaskForm = () => {
   const textInput = document.createElement("input");
   textInput.id = "create-task-input";
   textInput.type = "text";
-  textInput.placeholder = "Task Title ...";
+  textInput.placeholder = "New task ...";
 
   const createButton = document.createElement("button");
   createButton.textContent = "Create New Task";
   createButton.addEventListener("click", () => {
     const title = document.getElementById("create-task-input").value;
-    console.log(title);
     const task = new Task(title);
     currentProject.addTask(task);
     renderApp();
@@ -110,13 +158,12 @@ const createProjectForm = () => {
   const textInput = document.createElement("input");
   textInput.id = "create-project-input";
   textInput.type = "text";
-  textInput.placeholder = "Project Title ...";
+  textInput.placeholder = "New project ...";
 
   const createButton = document.createElement("button");
   createButton.textContent = "Create New Project";
   createButton.addEventListener("click", () => {
     const title = document.getElementById("create-project-input").value;
-    console.log(title);
     const project = new Project(title);
     projects.push(project);
     renderApp();

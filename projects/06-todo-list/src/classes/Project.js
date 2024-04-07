@@ -20,7 +20,7 @@ class Project {
     this.tasks.unshift(task);
   }
 
-  removeTask(index) {
+  deleteTask(index) {
     this.tasks = this.tasks.toSpliced(index, 1);
   }
 }
