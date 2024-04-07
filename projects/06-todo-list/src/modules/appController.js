@@ -27,14 +27,69 @@ const renderSidebar = () => {
   const sidebarDiv = document.createElement("div");
   sidebarDiv.classList.add("sidebar");
 
-  const projectsList = document.createElement("div");
-  projectsList.classList.add("sidebar-list");
-
   const projectsHeader = document.createElement("h1");
   projectsHeader.textContent = "My Projects";
 
-  // for each Project
-    // display Project.title with a click listener to render that project
+  const projectForm = createProjectForm();
+
+  const projectsList = populateProjectList();
+
+  sidebarDiv.appendChild(projectsHeader);
+  sidebarDiv.appendChild(projectForm);
+  sidebarDiv.appendChild(projectsList);
+
+  return sidebarDiv;
+}
+
+const renderContent = () => {
+  const contentDiv = document.createElement("div");
+  contentDiv.classList.add("content");
+  
+  if (currentProject != null) {
+    const projectDiv = renderProject(currentProject);
+    contentDiv.appendChild(projectDiv);
+  }
+
+  return contentDiv;
+}
+
+const createDefaultProject = () => {
+  const tasks = [];
+  tasks.unshift(new Task("eat"));
+  tasks.unshift(new Task("sleep"));
+  const project = new Project("inbox", "default project", tasks);
+  projects.unshift(project);
+  currentProject = project;
+}
+
+const createProjectForm = () => {
+  const createProjectDiv = document.createElement("div");
+  createProjectDiv.classList.add("create-project");
+
+  const textInput = document.createElement("input");
+  textInput.id = "create-project-input";
+  textInput.type = "text";
+  textInput.placeholder = "Project Title ...";
+
+  const createButton = document.createElement("button");
+  createButton.textContent = "Create New Project";
+  createButton.addEventListener("click", () => {
+    const title = document.getElementById("create-project-input").value;
+    console.log(title);
+    const project = new Project(title);
+    projects.push(project);
+    renderApp();
+  });
+
+  createProjectDiv.appendChild(textInput);
+  createProjectDiv.appendChild(createButton);
+  return createProjectDiv;
+}
+
+const populateProjectList = () => {
+  const projectsList = document.createElement("div");
+  projectsList.classList.add("sidebar-list");
+
   projects.forEach((project, projectIndex) => {
     const projectDiv = document.createElement("div");
     projectDiv.classList.add("sidebar-project");
@@ -63,32 +118,8 @@ const renderSidebar = () => {
 
     projectsList.appendChild(projectDiv);
   });
-  
-  sidebarDiv.appendChild(projectsHeader);
-  sidebarDiv.appendChild(projectsList);
 
-  return sidebarDiv;
-}
-
-const renderContent = () => {
-  const contentDiv = document.createElement("div");
-  contentDiv.classList.add("content");
-  
-  if (currentProject != null) {
-    const projectDiv = renderProject(currentProject);
-    contentDiv.appendChild(projectDiv);
-  }
-
-  return contentDiv;
-}
-
-const createDefaultProject = () => {
-  const tasks = [];
-  tasks.unshift(new Task("eat"));
-  tasks.unshift(new Task("sleep"));
-  const project = new Project("inbox", "default project", tasks);
-  projects.unshift(project);
-  currentProject = project;
+  return projectsList;
 }
 
 createDefaultProject();

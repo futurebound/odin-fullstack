@@ -23,6 +23,12 @@
   gap: 24px;
 }
 
+.sidebar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 .sidebar-project {
   width: 100%;
   background-color: white;
