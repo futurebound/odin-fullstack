@@ -1,8 +1,9 @@
 "use strict";
 
-import renderProject from "./renderProject";
+// import renderProject from "./renderProject";
 import Project from "../classes/Project";
 import Task from "../classes/Task";
+import renderTask from "./renderTask";
 
 // import renderSidebar from './renderSidebar';
 // import renderContent from './renderContent';
@@ -53,13 +54,53 @@ const renderContent = () => {
   return contentDiv;
 }
 
-const createDefaultProject = () => {
-  const tasks = [];
-  tasks.unshift(new Task("eat"));
-  tasks.unshift(new Task("sleep"));
-  const project = new Project("inbox", "default project", tasks);
-  projects.unshift(project);
-  currentProject = project;
+const renderProject = (project) => {
+  const projectDiv = document.createElement("div");
+  projectDiv.classList.add("project");
+
+  const title = document.createElement("h2");
+  title.textContent = project.getTitle();
+
+  const taskForm = createTaskForm();
+
+  const tasksDiv = document.createElement("div");
+  tasksDiv.classList.add("tasks");
+  const tasks = project.tasks;
+  tasks.forEach(task => {
+    // console.log(task);
+    const taskDiv = renderTask(task);
+    tasksDiv.appendChild(taskDiv);
+  });
+
+  projectDiv.appendChild(title);
+  projectDiv.appendChild(taskForm);
+  projectDiv.appendChild(tasksDiv);
+
+  return projectDiv;
+}
+
+const createTaskForm = () => {
+  const createTaskDiv = document.createElement("div");
+  createTaskDiv.classList.add("create-task");
+
+  const textInput = document.createElement("input");
+  textInput.id = "create-task-input";
+  textInput.type = "text";
+  textInput.placeholder = "Task Title ...";
+
+  const createButton = document.createElement("button");
+  createButton.textContent = "Create New Task";
+  createButton.addEventListener("click", () => {
+    const title = document.getElementById("create-task-input").value;
+    console.log(title);
+    const task = new Task(title);
+    currentProject.addTask(task);
+    renderApp();
+  });
+
+  createTaskDiv.appendChild(textInput);
+  createTaskDiv.appendChild(createButton);
+  return createTaskDiv;
 }
 
 const createProjectForm = () => {
@@ -120,6 +161,16 @@ const populateProjectList = () => {
   });
 
   return projectsList;
+}
+
+
+const createDefaultProject = () => {
+  const tasks = [];
+  tasks.unshift(new Task("eat"));
+  tasks.unshift(new Task("sleep"));
+  const project = new Project("inbox", "default project", tasks);
+  projects.unshift(project);
+  currentProject = project;
 }
 
 createDefaultProject();
