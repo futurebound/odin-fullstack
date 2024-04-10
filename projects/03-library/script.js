@@ -81,19 +81,27 @@ function displayAllBooks() {
   }
 }
 
-const modal = document.querySelector(".modal")
-const openModal = document.querySelector(".open-button")
-const closeModal = document.querySelector(".close-button")
-const submitModal = document.querySelector(".submit-button")
+const title = document.getElementById("title")
+const author = document.getElementById("author")
+const pages = document.getElementById("pages")
+const read = document.getElementById("read")
 
-openModal.addEventListener("click", () => {
-  modal.showModal()
+title.addEventListener("input", (event) => {
+  if (title.validity.typeMismatch) {
+    title.setCustomValidity("Expecting a title!")
+  } else {
+    title.setCustomValidity("")
+  }
 })
 
-submitModal.addEventListener("click", (e) => {
+const modal = document.querySelector(".modal")
+const submitButton = document.querySelector(".submit-button")
+
+
+submitButton.addEventListener("click", (e) => {
   e.preventDefault()
   let book = {}
-  const data = new FormData(document.querySelector("#modal-form"))
+  const data = new FormData(document.querySelector("#book-form"))
   for (const [field, value] of data.entries()) {
     console.log(field, value);
     book[field] = value
@@ -102,7 +110,6 @@ submitModal.addEventListener("click", (e) => {
       book.read === "on" ? true : false)
   addBookToLibrary(newBook)
   displayAllBooks()
-  modal.close()
 })
 
 const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, false);
