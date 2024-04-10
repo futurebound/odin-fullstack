@@ -29,17 +29,37 @@ img {
   width: auto;
   color: white;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 24px;
   border-radius: 0 3px 3px 0;
   user-select: none;
+  opacity: 0.8;
 }
 
 .next {
   right: 0;
-  border-radius:  3px 0 0 3px;
+  border-radius: 3px 0 0 3px;
 }
 
 .prev:hover,
 .next:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.slide-dots {
+  text-align: center;
+}
+
+.dot {
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+  background-color: gray;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0 3px;
+}
+
+.selected, .dot:hover {
+  background-color: blueviolet;
 }
