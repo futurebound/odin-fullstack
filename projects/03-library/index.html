@@ -13,18 +13,21 @@
       <label for="title">
         Title:
         <input type="text" id="title" name="title" minlength="3" maxlength="150" required>
+        <span class="error"></span>
       </label>
     </p>
     <p>
       <label for="author">
         Author:
         <input type="text" id="author" name="author" minlength="10" maxlength="100" required>
+        <span class="error"></span>
       </label>
     </p>
     <p>
       <label for="pages">
         Number of Pages:
-        <input type="number" id="pages" name="pages" min="5" max="5000" required>
+        <input type="number" id="pages" name="pages" min="10" max="5000" required>
+        <span class="error"></span>
       </label>
     </p>
     <p>
@@ -33,8 +36,6 @@
         <input type="checkbox" id="read" name="read">
       </label>
     </p>
-    <!-- <input type="submit" value="Normal Close"> -->
-    <!-- <button type="submit" class="close-button">CANCEL</button> -->
     <button type="submit" class="submit-button">ADD BOOK</button>
   </form>
   <div class="container">

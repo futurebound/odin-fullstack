@@ -81,35 +81,82 @@ function displayAllBooks() {
   }
 }
 
+const form = document.getElementById("book-form");
 const title = document.getElementById("title")
 const author = document.getElementById("author")
 const pages = document.getElementById("pages")
 const read = document.getElementById("read")
 
-title.addEventListener("input", (event) => {
-  if (title.validity.typeMismatch) {
-    title.setCustomValidity("Expecting a title!")
+const titleError = document.querySelector("#title + span.error");
+const authorError = document.querySelector("#author + span.error");
+const pagesError = document.querySelector("#pages + span.error");
+
+title.addEventListener("input", (e) => {
+  if (title.validity.valid) {
+    titleError.textContent = ""
+    titleError.className = "error"
   } else {
-    title.setCustomValidity("")
+    showError();
   }
 })
 
-const modal = document.querySelector(".modal")
+author.addEventListener("input", (e) => {
+  if (author.validity.valid) {
+    authorError.textContent = ""
+    authorError.className = "error"
+  } else {
+    showError();
+  }
+})
+
+pages.addEventListener("input", (e) => {
+  if (pages.validity.valid) {
+    pagesError.textContent = ""
+    pagesError.className = "error"
+  } else {
+    showError();
+  }
+})
+
+const showError = () => {
+  if (title.validity.valueMissing) {
+    titleError.textContent = "Please enter a book title."
+  } else if (title.validity.tooShort) {
+    titleError.textContent = `Title should be at least ${title.minLength} chars. You've only entered ${title.value.length}`
+  }
+
+  if (author.validity.valueMissing) {
+    authorError.textContent = "Please enter a book author."
+  } else if (author.validity.tooShort) {
+    authorError.textContent = `Author should be at least ${author.minLength} chars. You've only entered ${author.value.length}`
+  }
+
+  if (pages.validity.valueMissing) {
+    pagesError.textContent = "Please enter the number of pages in the book."
+  } else if (pages.validity.rangeUnderflow || pages.validity.rangeOverflow) {
+    pagesError.textContent = `Pages should be between ${pages.min} and ${pages.max}.`
+  }
+}
+
 const submitButton = document.querySelector(".submit-button")
 
-
 submitButton.addEventListener("click", (e) => {
-  e.preventDefault()
-  let book = {}
-  const data = new FormData(document.querySelector("#book-form"))
-  for (const [field, value] of data.entries()) {
-    console.log(field, value);
-    book[field] = value
+  console.log(title.validity.valid);
+  if (!title.validity.valid || !author.validity.valid || !pages.validity.valid) {
+    showError();
+    e.preventDefault();
+  } else {
+    let book = {}
+    const data = new FormData(document.querySelector("#book-form"))
+    for (const [field, value] of data.entries()) {
+      console.log(field, value);
+      book[field] = value
+    }
+    const newBook = new Book(book.title, book.author, book.pages, 
+        book.read === "on" ? true : false)
+    addBookToLibrary(newBook)
+    displayAllBooks()
   }
-  const newBook = new Book(book.title, book.author, book.pages, 
-      book.read === "on" ? true : false)
-  addBookToLibrary(newBook)
-  displayAllBooks()
 })
 
 const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, false);
