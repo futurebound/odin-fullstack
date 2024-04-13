@@ -4,3 +4,30 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+body {
+  /* background-color: blue; */
+  background: lightblue;
+}
+
+.content {
+  display: grid;
+  padding: 5%;
+  /* place-content: center; */
+}
+
+.form-container {
+  background-color: white;
+  width: 500px;
+  padding: 32px;
+  border-radius: 12px;
+  margin: auto;
+}
+
+input:invalid {
+  border-color: #900;
+}
+
+.error {
+  background-color: #900;
+}

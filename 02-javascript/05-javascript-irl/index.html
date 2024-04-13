@@ -4,12 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Form Validation</title>
+  <link rel="stylesheet" href="./main.css">
 </head>
 <body>
   <div class="content">
-    <form action="">
-      
-    </form>
+    <div class="form-container">
+      <form action="">
+        <label for="email">Email
+          <span class="error"></span>
+          <input type="email" id="email" name="email">
+        </label>
+
+        <button type="submit">SUBMIT</button>
+      </form>
+    </div>
   </div>
   <script src="./index.js"></script>
 </body>
