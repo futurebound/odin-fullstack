@@ -10,25 +10,21 @@ const imgButton = document.getElementById("img-button");
 const searchInput = document.getElementById("search");
 
 imgButton.addEventListener("click", () => {
-  const queryTerm = searchInput.value;
-  fetch(`https://api.giphy.com/v1/gifs/translate?api_key=${GIPHY_API_KEY}&s=${queryTerm}`, { mode: 'cors' })
-    .then((response) => {
-      if (!response.ok) {
-        alert("invalid API key");
-        GIPHY_API_KEY = prompt("enter your GIPHY API key");
-      }
-      // console.log(response.json());
-      return response.json();
-    })
-    // .catch((error) => {
-    //   console.error(error);
-    // })
-    .then((response) => {
-      if (response.data.length <= 0) {
-        alert("no matching images found");
-      } else {
-        img.src = response.data.images.original.url;
-      } 
-    });
+  getImage();
 });
 
+async function getImage() {
+  const queryTerm = searchInput.value;
+  const response = await fetch(`https://api.giphy.com/v1/gifs/translate?api_key=${GIPHY_API_KEY}&s=${queryTerm}`, { mode: 'cors' });
+  if (!response.ok) {
+    alert("invalid API key");
+    GIPHY_API_KEY = prompt("enter your GIPHY API key, then try again");
+  } else {
+    const imageData = await response.json();
+    if (imageData.data.length <= 0) {
+      alert("no matching images found");
+    } else {
+      img.src = imageData.data.images.original.url;
+    } 
+  }
+}
