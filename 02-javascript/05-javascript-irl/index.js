@@ -17,7 +17,7 @@ const submitBtn = document.getElementById("submit-btn");
 email.addEventListener("input", (e) => {
   if (email.validity.valid) {
     emailError.textContent = "";
-    emailError.className = "error"
+    // emailError.className = "error"
   } else {
     showError();
   }
@@ -43,7 +43,7 @@ const showError = () => {
   } 
 
   if (password.validity.valueMissing) {
-    passwordError.textContent = "Please enter the number of pages in the book."
+    passwordError.textContent = "Please enter a password"
   } 
 
   if (passwordConfirm.validity.valueMissing) {
