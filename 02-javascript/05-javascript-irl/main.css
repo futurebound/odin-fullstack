@@ -24,10 +24,35 @@ body {
   margin: auto;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+input {
+  display: block;
+  width: 100%;
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+
+input:valid {
+  border-color: green;
+}
+
 input:invalid {
   border-color: #900;
 }
 
 .error {
-  background-color: #900;
+  color: #900;
+  margin-left: 12px;
+}
+
+button {
+  margin-top: 12px;
+  width: 72px;
+  height: 36px;
+  align-self: center;
 }

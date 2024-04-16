@@ -9,13 +9,32 @@
 <body>
   <div class="content">
     <div class="form-container">
-      <form action="">
-        <label for="email">Email
-          <span class="error"></span>
-          <input type="email" id="email" name="email">
+      <form id="form">
+        <label for="email">
+          <span class="label-text">Email</span>
+          <span class="error">Error</span>
+          <input class="block-input" type="email" id="email" name="email" required>
         </label>
 
-        <button type="submit">SUBMIT</button>
+        <label for="country">
+          <span class="label-text">Country</span>
+          <span class="error">Error</span>
+          <input class="block-input" type="text" id="country" name="country" required>
+        </label>
+
+        <label for="password">
+          <span class="label-text">Password</span>
+          <span class="error">Error</span>
+          <input class="block-input" type="password" id="password" name="password" required>
+        </label>
+
+        <label for="password-confirm">
+          <span class="label-text">Confirm Password</span>
+          <span class="error">Error</span>
+          <input class="block-input" type="password" id="password-confirm" name="password-confirm" required>
+        </label>
+
+        <button id="submit-btn" type="submit">SUBMIT</button>
       </form>
     </div>
   </div>
