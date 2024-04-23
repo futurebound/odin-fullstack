@@ -2,24 +2,24 @@
 
 class Node {
   constructor(value = null, next = null) {
-    this.value = value;
-    this.next = next;
+    this._value = value;
+    this._next = next;
   }
 
   get value() {
-    return this.value;
+    return this._value;
   }
 
   set value(value) {
-    this.value = value;
+    this._value = value;
   }
 
   get next() {
-    return this.next;
+    return this._next;
   }
 
   set next(next) {
-    this.next = next;
+    this._next = next;
   }
 }
 

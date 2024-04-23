@@ -105,6 +105,7 @@ class LinkedList {
     let current = this.head;
     while (current !== null) {
       output += `( ${current.value} ) -> `;
+      current = current.next;
     }
     return output + 'null';
   }
