@@ -75,9 +75,29 @@ class LinkedList {
     return popped;
   }
 
-  contains(value) {}
+  // O(N)
+  contains(value) {
+    let current = this.head;
+    while (current !== null) {
+      if (current.value === value) return true;
+      current = current.next;
+    }
 
-  find(value) {}
+    return false;
+  }
+
+  // O(N)
+  find(value) {
+    let index = 0;
+    let current = this.head;
+    while (current !== null) {
+      if (current.value === value) return index;
+      current = current.next;
+      index++;
+    }
+
+    return null;
+  }
 
   toString() {}
 }
