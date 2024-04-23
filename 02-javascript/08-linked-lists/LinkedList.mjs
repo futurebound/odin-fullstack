@@ -44,6 +44,7 @@ class LinkedList {
   // O(N)
   at(index) {
     if (index > this.size) return null;
+
     let current = this.head;
     for (let i = 1; i < index; i++) {
       current = current.next;
@@ -51,7 +52,28 @@ class LinkedList {
     return current.value;
   }
 
-  pop() {}
+  // O(N)
+  pop() {
+    if (this.size <= 0) return null;
+    else if (this.size === 1) {
+      const node = this.head;
+      this.head = null;
+      this.tail = null;
+      return node;
+    }
+
+    // navigate to 2nd to last node, reassign as new tail, and return
+    //  the last node (popped)
+    const current = this.head;
+    while (current.next.next !== null) {
+      current = current.next;
+    }
+    const popped = current.next;
+    current.next = null;
+    this.tail = current;
+    this.size--;
+    return popped;
+  }
 
   contains(value) {}
 
