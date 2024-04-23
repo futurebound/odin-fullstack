@@ -13,8 +13,13 @@ class LinkedList {
   append(value) {
     const node = new Node(value);
 
-    if (this.head === null) this.head = node;
-    this.tail = node;
+    if (this.size <= 0) {
+      this.head = node;
+      this.tail = node;
+    } else {
+      this.tail.next = node;
+      this.tail = this.tail.next;
+    }
     this.size++;
   }
 
