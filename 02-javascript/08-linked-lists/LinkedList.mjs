@@ -99,7 +99,15 @@ class LinkedList {
     return null;
   }
 
-  toString() {}
+  // O(N)
+  toString() {
+    let output = '';
+    let current = this.head;
+    while (current !== null) {
+      output += `( ${current.value} ) -> `;
+    }
+    return output + 'null';
+  }
 }
 
 export default LinkedList;
