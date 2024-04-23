@@ -18,7 +18,13 @@ class LinkedList {
     this.size++;
   }
 
-  prepend(value) {}
+  // O(1)
+  prepend(value) {
+    const node = new Node(value, this.head);
+    if (this.tail === null) this.tail = node;
+    this.head = node;
+    this.size++;
+  }
 
   size() {}
 
