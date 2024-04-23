@@ -26,13 +26,30 @@ class LinkedList {
     this.size++;
   }
 
-  size() {}
+  // O(1)
+  size() {
+    return this.size;
+  }
 
-  head() {}
+  // O(1)
+  head() {
+    return this.head;
+  }
 
-  tail() {}
+  // O(1)
+  tail() {
+    return this.tail;
+  }
 
-  at(index) {}
+  // O(N)
+  at(index) {
+    if (index > this.size) return null;
+    let current = this.head;
+    for (let i = 1; i < index; i++) {
+      current = current.next;
+    }
+    return current.value;
+  }
 
   pop() {}
 
