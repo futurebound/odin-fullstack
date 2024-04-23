@@ -20,13 +20,13 @@ const fibs = (n) => {
   return output;
 };
 
-// console.log('Testing iterative fibs():');
-// console.log(fibs(-1));
-// console.log(fibs(0));
-// console.log(fibs(1));
-// console.log(fibs(2));
-// console.log(fibs(3));
-// console.log(fibs(8));
+console.log('Testing iterative fibs():');
+console.log(fibs(-1));
+console.log(fibs(0));
+console.log(fibs(1));
+console.log(fibs(2));
+console.log(fibs(3));
+console.log(fibs(8));
 
 const fibsRec = (n) => {
   if (n <= 0) {
