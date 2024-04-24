@@ -113,6 +113,33 @@ const testInsertAt = () => {
   console.log(list.toString());
 };
 
+const testRemoveAt = () => {
+  const list = new LinkedList();
+  list.insertAt(1, 0);
+  list.insertAt(2, 1);
+  list.insertAt(3, 2);
+  list.insertAt(4, 3);
+  console.log(list.toString());
+
+  console.log(list.removeAt(4));
+  console.log(list.toString());
+
+  console.log(list.removeAt(0));
+  console.log(list.toString());
+
+  console.log(list.removeAt(1));
+  console.log(list.toString());
+
+  console.log(list.removeAt(1));
+  console.log(list.toString());
+
+  list.append(3);
+  list.append(4);
+  console.log(list.toString());
+  console.log(list.removeAt(2));
+  console.log(list.toString());
+};
+
 // testAppend();
 // testPrepend();
 // testSize();
@@ -122,4 +149,5 @@ const testInsertAt = () => {
 // testPop();
 // testContains();
 // testFind();
-testInsertAt();
+// testInsertAt();
+testRemoveAt();

@@ -118,18 +118,11 @@ class LinkedList {
 
   // O(N)
   // Assumes valid 0 <= index <= size + 1
-  // insert at index 0
-  //  list is empty
-  //    create new node
-  //    point node.next -> head (can be null or prior head)
-  //    point head -> node
-  //    if list was empty prior, assign tail -> node
-
   insertAt(value, index) {
     if (index === 0) {
       const node = new Node(value, this.head);
       this.head = node;
-      if (this.size === 0) this.tail = node;
+      if (this.size === 0) this.tail = node; // edge case
     } else {
       let current = this.head;
       for (let i = 0; i < index - 1; i++) {
@@ -137,13 +130,41 @@ class LinkedList {
       }
       const node = new Node(value, current.next);
       current.next = node;
+
+      // edge cases
       if (this.size === 1 || this.size === index) this.tail = node;
     }
     this.size++;
   }
 
   // O(N)
-  removeAt(index) {}
+  // assumes valid 0 <= index < size.
+  // returns null if given index >= size
+  // removes node from list without a reference to list
+  // i.e. removeAt(index).next always is null
+  removeAt(index) {
+    if (index >= this.size) return null;
+    else if (index === 0) {
+      const node = this.head;
+      this.head = node.next;
+      if (this.size === 1) this.tail = node.next;
+      node.next = null;
+      this.size--;
+      return node;
+    } else {
+      // 0 < index < size
+      let current = this.head;
+      for (let i = 0; i < index - 1; i++) {
+        current = current.next;
+      }
+      const node = current.next;
+      current.next = node.next;
+      node.next = null;
+      this.size--;
+      if (this.size === index) this.tail = current;
+      return node;
+    }
+  }
 }
 
 export default LinkedList;
