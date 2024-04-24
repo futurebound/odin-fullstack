@@ -115,6 +115,35 @@ class LinkedList {
     }
     return output + 'null';
   }
+
+  // O(N)
+  // Assumes valid 0 <= index <= size + 1
+  // insert at index 0
+  //  list is empty
+  //    create new node
+  //    point node.next -> head (can be null or prior head)
+  //    point head -> node
+  //    if list was empty prior, assign tail -> node
+
+  insertAt(value, index) {
+    if (index === 0) {
+      const node = new Node(value, this.head);
+      this.head = node;
+      if (this.size === 0) this.tail = node;
+    } else {
+      let current = this.head;
+      for (let i = 0; i < index - 1; i++) {
+        current = current.next;
+      }
+      const node = new Node(value, current.next);
+      current.next = node;
+      if (this.size === 1 || this.size === index) this.tail = node;
+    }
+    this.size++;
+  }
+
+  // O(N)
+  removeAt(index) {}
 }
 
 export default LinkedList;

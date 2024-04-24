@@ -78,10 +78,48 @@ const testPop = () => {
   console.log(list.toString());
 };
 
+const testContains = () => {
+  const list = new LinkedList();
+  list.append(1);
+  list.append(2);
+  list.append(3);
+  console.log(list.contains(1));
+  console.log(list.contains(3));
+  console.log(list.contains(4));
+  console.log(list.contains('three'));
+};
+
+const testFind = () => {
+  const list = new LinkedList();
+  list.append(1);
+  list.append(2);
+  list.append(3);
+  console.log(list.toString());
+  console.log(list.find(1));
+  console.log(list.find(3));
+  console.log(list.find(4));
+  console.log(list.find('three'));
+};
+
+const testInsertAt = () => {
+  const list = new LinkedList();
+  list.insertAt(1, 0);
+  console.log(list.toString());
+  list.insertAt(2, 0);
+  console.log(list.toString());
+  list.insertAt(3, 1);
+  console.log(list.toString());
+  list.insertAt(4, 3);
+  console.log(list.toString());
+};
+
 // testAppend();
 // testPrepend();
 // testSize();
 // testHead();
 // testTail();
 // testAt();
-testPop();
+// testPop();
+// testContains();
+// testFind();
+testInsertAt();
