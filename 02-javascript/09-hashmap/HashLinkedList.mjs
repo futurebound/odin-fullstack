@@ -47,6 +47,7 @@ class HashLinkedList {
   }
 
   // O(N)
+  // Returns the node at given valid index, else null;
   at(index) {
     if (index >= this.size) return null;
 
@@ -54,7 +55,7 @@ class HashLinkedList {
     for (let i = 0; i < index; i++) {
       current = current.next;
     }
-    return current.value;
+    return current;
   }
 
   // O(N)
@@ -106,11 +107,24 @@ class HashLinkedList {
   }
 
   // O(N)
+  findKey(key) {
+    let index = 0;
+    let current = this.head;
+    while (current !== null) {
+      if (current.key === key) return index;
+      current = current.next;
+      index++;
+    }
+
+    return null;
+  }
+
+  // O(N)
   toString() {
     let output = '';
     let current = this.head;
     while (current !== null) {
-      output += `( key=${current.key} value=${current.value} ) -> `;
+      output += `( ${current.key}: ${current.value} ) -> `;
       current = current.next;
     }
     return output + 'null';
