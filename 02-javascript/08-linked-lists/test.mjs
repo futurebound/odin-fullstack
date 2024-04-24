@@ -51,6 +51,7 @@ const testTail = () => {
 
 const testAt = () => {
   const list = new LinkedList();
+  console.log(list.at(0));
   list.append(1);
   list.append(2);
   console.log(list.at(0));
@@ -58,9 +59,29 @@ const testAt = () => {
   console.log(list.at(2));
 };
 
+const testPop = () => {
+  const list = new LinkedList();
+  console.log(list.toString());
+  console.log(list.pop());
+  console.log(list.toString());
+
+  list.append(1);
+  console.log(list.toString());
+  console.log(list.pop());
+  console.log(list.toString());
+
+  list.append(1);
+  list.append(2);
+  list.append(3);
+  console.log(list.toString());
+  console.log(list.pop());
+  console.log(list.toString());
+};
+
 // testAppend();
 // testPrepend();
 // testSize();
 // testHead();
 // testTail();
-testAt();
+// testAt();
+testPop();

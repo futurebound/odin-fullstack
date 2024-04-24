@@ -48,10 +48,10 @@ class LinkedList {
 
   // O(N)
   at(index) {
-    if (index > this.size) return null;
+    if (index >= this.size) return null;
 
     let current = this.head;
-    for (let i = 1; i < index; i++) {
+    for (let i = 0; i < index; i++) {
       current = current.next;
     }
     return current.value;
@@ -64,12 +64,13 @@ class LinkedList {
       const node = this.head;
       this.head = null;
       this.tail = null;
+      this.size--;
       return node;
     }
 
     // navigate to 2nd to last node, reassign as new tail, and return
     //  the last node (popped)
-    const current = this.head;
+    let current = this.head;
     while (current.next.next !== null) {
       current = current.next;
     }
