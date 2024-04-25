@@ -16,6 +16,8 @@ class Tree {
     this._root = node;
   }
 
+  // returns a null or a TreeNode that is the root of a balanced BST subtree
+  // 0 <= start <= end < array.length
   createBalancedTree(array, start, end) {
     // base case: subarray has been completely processed
     if (start > end) return null;
@@ -41,9 +43,10 @@ class Tree {
     unique.sort((a, b) => {
       return parseInt(a) - parseInt(b);
     });
+    console.log(unique);
 
     // input deduped and sorted, now can build balanced tree
-    return this.createBalancedTree(unique, 0, unique.length);
+    return this.createBalancedTree(unique, 0, unique.length - 1);
   }
 
   prettyPrint(node, prefix = '', isLeft = true) {
