@@ -58,9 +58,36 @@ const testClear = () => {
   console.log(`post-clear length: ${map.length()}`);
 };
 
+const testKeys = () => {
+  const map = new HashMap();
+  console.log(map.keys());
+  map.set('Carlos', 'I am the old value');
+  map.set('Carla', 'I am Carla value');
+  console.log(map.keys());
+};
+
+const testValues = () => {
+  const map = new HashMap();
+  console.log(map.values());
+  map.set('Carlos', 'I am the old value');
+  map.set('Carla', 'I am Carla value');
+  console.log(map.values());
+};
+
+const testEntries = () => {
+  const map = new HashMap();
+  console.log(map.entries());
+  map.set('Carlos', 'I am the old value');
+  map.set('Carla', 'I am Carla value');
+  console.log(map.entries());
+};
+
 // testSet();
 // testGet();
 // testHas();
-testRemove();
+// testRemove();
 // testLength();
 // testClear();
+// testKeys();
+// testValues();
+testEntries();

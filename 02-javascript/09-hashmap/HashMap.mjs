@@ -106,6 +106,51 @@ class HashMap {
     this.capacity = DEFAULT_CAPACITY;
     this.buckets = new Array(this.capacity).fill(null);
   }
+
+  // Returns array containing all keys
+  keys() {
+    const output = [];
+    this.buckets.forEach((list) => {
+      if (list !== null) {
+        const listKeys = list.keys();
+        listKeys.forEach((key) => {
+          output.push(key);
+        });
+      }
+    });
+
+    return output;
+  }
+
+  // Returns array containing all values
+  values() {
+    const output = [];
+    this.buckets.forEach((list) => {
+      if (list !== null) {
+        const listValues = list.values();
+        listValues.forEach((value) => {
+          output.push(value);
+        });
+      }
+    });
+
+    return output;
+  }
+
+  // Returns array containing all [key, value] pairs
+  entries() {
+    const output = [];
+    this.buckets.forEach((list) => {
+      if (list !== null) {
+        for (let i = 0; i < list.size; i++) {
+          const node = list.at(i);
+          output.push([node.key, node.value]);
+        }
+      }
+    });
+
+    return output;
+  }
 }
 
 export default HashMap;

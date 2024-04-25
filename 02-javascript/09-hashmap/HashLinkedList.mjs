@@ -179,6 +179,26 @@ class HashLinkedList {
       return node;
     }
   }
+
+  keys() {
+    const output = [];
+    let current = this.head;
+    while (current !== null) {
+      output.push(current.key);
+      current = current.next;
+    }
+    return output;
+  }
+
+  values() {
+    const output = [];
+    let current = this.head;
+    while (current !== null) {
+      output.push(current.value);
+      current = current.next;
+    }
+    return output;
+  }
 }
 
 export default HashLinkedList;
