@@ -58,7 +58,6 @@ class Tree {
     queue.enqueue(this.root);
     while (!queue.isEmpty()) {
       let node = queue.dequeue();
-      // console.log(node);
       if (node !== null) {
         queue.enqueue(node.left);
         queue.enqueue(node.right);
@@ -67,6 +66,25 @@ class Tree {
     }
 
     return output;
+  }
+
+  inOrder(callback = null) {
+    let output = [];
+    this.inOrderTraversal(output, this.root);
+    return output;
+  }
+
+  inOrderTraversal(array, node, callback = null) {
+    if (node !== null) {
+      this.inOrderTraversal(node.left);
+      array.push(node.data);
+      this.inOrderTraversal(node.right);
+    }
+  }
+
+  rebalance() {
+    const data = inOrder();
+    this._root = this.buildTree(data);
   }
 
   prettyPrint(node, prefix = '', isLeft = true) {
