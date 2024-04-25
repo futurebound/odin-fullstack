@@ -1,8 +1,8 @@
 'use strict';
 
-import HashNode from './HashNode.mjs';
+import HashSetNode from './HashSetNode.mjs';
 
-class HashLinkedList {
+class HashSetLinkedList {
   constructor() {
     this.head = null;
     this.tail = null;
@@ -10,8 +10,8 @@ class HashLinkedList {
   }
 
   // O(1)
-  append(key, value) {
-    const node = new HashNode(key, value);
+  append(key) {
+    const node = new HashSetNode(key);
 
     if (this.size <= 0) {
       this.head = node;
@@ -24,8 +24,8 @@ class HashLinkedList {
   }
 
   // O(1)
-  prepend(key, value) {
-    const node = new HashNode(key, value, this.head);
+  prepend(key) {
+    const node = new HashSetNode(key, this.head);
     if (this.tail === null) this.tail = node;
     this.head = node;
     this.size++;
@@ -83,10 +83,10 @@ class HashLinkedList {
   }
 
   // O(N)
-  contains(key, value) {
+  contains(key) {
     let current = this.head;
     while (current !== null) {
-      if (current.key === key && current.value === value) return true;
+      if (current.key === key) return true;
       current = current.next;
     }
 
@@ -94,20 +94,7 @@ class HashLinkedList {
   }
 
   // O(N)
-  find(key, value) {
-    let index = 0;
-    let current = this.head;
-    while (current !== null) {
-      if (current.key === key && current.value === value) return index;
-      current = current.next;
-      index++;
-    }
-
-    return null;
-  }
-
-  // O(N)
-  findKey(key) {
+  find(key) {
     let index = 0;
     let current = this.head;
     while (current !== null) {
@@ -124,7 +111,7 @@ class HashLinkedList {
     let output = '';
     let current = this.head;
     while (current !== null) {
-      output += `( ${current.key}: ${current.value} ) -> `;
+      output += `( ${current.key} ) -> `;
       current = current.next;
     }
     return output + 'null';
@@ -132,9 +119,9 @@ class HashLinkedList {
 
   // O(N)
   // Assumes valid 0 <= index <= size + 1
-  insertAt(key, value, index) {
+  insertAt(key, index) {
     if (index === 0) {
-      const node = new HashNode(key, value, this.head);
+      const node = new HashSetNode(key, this.head);
       this.head = node;
       if (this.size === 0) this.tail = node; // edge case
     } else {
@@ -142,7 +129,7 @@ class HashLinkedList {
       for (let i = 0; i < index - 1; i++) {
         current = current.next;
       }
-      const node = new HashNode(key, value, current.next);
+      const node = new HashSetNode(key, current.next);
       current.next = node;
 
       // edge cases
@@ -189,16 +176,6 @@ class HashLinkedList {
     }
     return output;
   }
-
-  values() {
-    const output = [];
-    let current = this.head;
-    while (current !== null) {
-      output.push(current.value);
-      current = current.next;
-    }
-    return output;
-  }
 }
 
-export default HashLinkedList;
+export default HashSetLinkedList;

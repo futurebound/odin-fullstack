@@ -1,6 +1,6 @@
 'use strict';
 
-import HashLinkedList from './HashLinkedList.mjs';
+import HashMapLinkedList from './HashMapLinkedList.mjs';
 
 const PRIME_NUMBER = 13;
 const DEFAULT_CAPACITY = 16;
@@ -73,7 +73,7 @@ class HashMap {
     // console.log(`SET key: ${key} -> hashIndex=${hashIndex}`);
 
     if (this.buckets[hashIndex] === null) {
-      this.buckets[hashIndex] = new HashLinkedList();
+      this.buckets[hashIndex] = new HashMapLinkedList();
     }
 
     const list = this.buckets[hashIndex];

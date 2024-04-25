@@ -102,13 +102,13 @@ const testEntries = () => {
   console.log(map.entries());
 };
 
-// testSet();
+testSet();
 testSetExpandsTable();
-// testGet();
-// testHas();
-// testRemove();
-// testLength();
-// testClear();
-// testKeys();
-// testValues();
-// testEntries();
+testGet();
+testHas();
+testRemove();
+testLength();
+testClear();
+testKeys();
+testValues();
+testEntries();

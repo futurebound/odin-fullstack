@@ -1,6 +1,6 @@
 'use strict';
 
-class HashNode {
+class HashMapNode {
   constructor(key = null, value = null, next = null) {
     this._key = key;
     this._value = value;
@@ -32,4 +32,4 @@ class HashNode {
   }
 }
 
-export default HashNode;
+export default HashMapNode;
