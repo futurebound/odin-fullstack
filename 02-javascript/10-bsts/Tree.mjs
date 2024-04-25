@@ -1,5 +1,6 @@
 'use strict';
 
+import Queue from './Queue.mjs';
 import TreeNode from './TreeNode.mjs';
 
 class Tree {
@@ -47,6 +48,25 @@ class Tree {
 
     // input deduped and sorted, now can build balanced tree
     return this.createBalancedTree(unique, 0, unique.length - 1);
+  }
+
+  levelOrder(callback = null) {
+    if (this.size <= 0) return [];
+
+    let output = [];
+    let queue = new Queue();
+    queue.enqueue(this.root);
+    while (!queue.isEmpty()) {
+      let node = queue.dequeue();
+      // console.log(node);
+      if (node !== null) {
+        queue.enqueue(node.left);
+        queue.enqueue(node.right);
+        output.push(node.data);
+      }
+    }
+
+    return output;
   }
 
   prettyPrint(node, prefix = '', isLeft = true) {
