@@ -13,6 +13,26 @@ const testSet = () => {
   console.log(map);
 };
 
+const testSetExpandsTable = () => {
+  const map = new HashMap();
+  map.set('Arlos', '1');
+  map.set('Brlos', '2');
+  map.set('Crlos', '3');
+  map.set('Drlos', '4');
+  map.set('Erlos', '5');
+  map.set('Frlos', '6');
+  map.set('Grlos', '7');
+  map.set('Hrlos', '8');
+  map.set('Irlos', '9');
+  map.set('Jrlos', '10');
+  map.set('Krlos', '11');
+  map.set('Lrlos', '12');
+  console.log(map);
+
+  map.set('Mrlos', '13');
+  console.log(map);
+};
+
 const testGet = () => {
   const map = new HashMap();
   console.log(map.get('Carlos'));
@@ -83,6 +103,7 @@ const testEntries = () => {
 };
 
 // testSet();
+testSetExpandsTable();
 // testGet();
 // testHas();
 // testRemove();
@@ -90,4 +111,4 @@ const testEntries = () => {
 // testClear();
 // testKeys();
 // testValues();
-testEntries();
+// testEntries();

@@ -51,6 +51,19 @@ class HashMap {
     return null;
   }
 
+  expandBuckets() {
+    this.size = 0;
+    this.capacity = this.capacity * 2;
+    const oldEntries = this.entries();
+    console.log(oldEntries);
+    this.buckets = new Array(this.capacity).fill(null);
+    oldEntries.forEach((entry) => {
+      const key = entry[0];
+      const value = entry[1];
+      this.set(key, value);
+    });
+  }
+
   // O(N) -> if all entries hash to single bucket
   // if the key exists in HashMap, old value is overwritten with given value
   // else a new node is added with the given key and value
@@ -71,6 +84,12 @@ class HashMap {
     } else {
       list.append(key, value);
       this.size++;
+    }
+
+    // check if we need to expand the HashTable
+    // console.log(Math.floor(this.capacity * this.loadFactor));
+    if (this.size > Math.floor(this.capacity * this.loadFactor)) {
+      this.expandBuckets();
     }
   }
 
