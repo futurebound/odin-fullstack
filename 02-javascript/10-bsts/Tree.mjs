@@ -68,6 +68,20 @@ class Tree {
     return output;
   }
 
+  preOrder(callback = null) {
+    let output = [];
+    this.preOrderTraversal(output, this.root);
+    return output;
+  }
+
+  preOrderTraversal(array, node, callback = null) {
+    if (node !== null) {
+      array.push(node.data);
+      this.preOrderTraversal(node.left);
+      this.preOrderTraversal(node.right);
+    }
+  }
+
   inOrder(callback = null) {
     let output = [];
     this.inOrderTraversal(output, this.root);
@@ -79,6 +93,20 @@ class Tree {
       this.inOrderTraversal(node.left);
       array.push(node.data);
       this.inOrderTraversal(node.right);
+    }
+  }
+
+  postOrder(callback = null) {
+    let output = [];
+    this.postOrderTraversal(output, this.root);
+    return output;
+  }
+
+  postOrderTraversal(array, node, callback = null) {
+    if (node !== null) {
+      this.postOrderTraversal(node.left);
+      this.postOrderTraversal(node.right);
+      array.push(node.data);
     }
   }
 
