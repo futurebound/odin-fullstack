@@ -36,6 +36,19 @@ class Tree {
     return node;
   }
 
+  // turn array into balanced binary tree full of Nodes
+  buildTree(array) {
+    if (array.length <= 0) return null;
+
+    let unique = [...new Set(array)]; // dedupe
+    unique.sort((a, b) => {
+      return parseInt(a) - parseInt(b);
+    });
+
+    // input deduped and sorted, now can build balanced tree
+    return this.createBalancedTree(unique, 0, unique.length - 1);
+  }
+
   /**
    * Inserts the given value into the BST.
    */
@@ -65,20 +78,6 @@ class Tree {
         return this.findHelper(value, node.right);
       }
     }
-  }
-
-  // turn array into balanced binary tree full of Nodes
-  buildTree(array) {
-    if (array.length <= 0) return null;
-
-    let unique = [...new Set(array)]; // dedupe
-    unique.sort((a, b) => {
-      return parseInt(a) - parseInt(b);
-    });
-    console.log(unique);
-
-    // input deduped and sorted, now can build balanced tree
-    return this.createBalancedTree(unique, 0, unique.length - 1);
   }
 
   levelOrder(callback = null) {
@@ -152,7 +151,7 @@ class Tree {
   // If a given node is null, will return 0.
   // A leaf node will return 1
   height(node) {
-    if (node === null) {
+    if (node === null || (node.left === null && node.right === null)) {
       return 0;
     }
 
@@ -167,10 +166,24 @@ class Tree {
    */
   depth(node) {
     // tree deduped, so can tell by comparing node.data equality
-    return this.preOrder;
+    if (node !== null && this.root !== null) {
+      return this.depthHelper(node, this.root, 0);
+    }
   }
 
-  depthHelper(node, currentDepth) {}
+  depthHelper(target, current, depth) {
+    if (target !== null && current !== null) {
+      if (target.data === current.data) {
+        return depth;
+      }
+
+      if (target.data < current.data) {
+        return this.depthHelper(target, current.left, depth + 1);
+      } else {
+        return this.depthHelper(target, current.right, depth + 1);
+      }
+    }
+  }
 
   /**
    * @returns true if difference in height of left & right subtrees is <= 1
