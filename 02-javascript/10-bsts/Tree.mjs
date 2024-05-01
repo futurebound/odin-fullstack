@@ -50,14 +50,17 @@ class Tree {
   }
 
   /**
-   * Inserts the given value into the BST.
+   * Inserts the given value into BST
+   * Does nothing if given value already in BST
    */
   insert(value) {
-    if (this.root === null) {
-      this.root = buildTree([value]);
-    } else {
-      // x = change(x) pattern
-      this.root = this.insertHelper(value, this.root);
+    if (!this.contains(value)) {
+      if (this.root === null) {
+        this.root = buildTree([value]);
+      } else {
+        // x = change(x) pattern
+        this.root = this.insertHelper(value, this.root);
+      }
     }
   }
 
@@ -87,12 +90,91 @@ class Tree {
   /**
    * Deletes the given value (assumes given value already in tree)
    */
-  delete(value) {}
+  delete(value) {
+    if (this.contains(value)) {
+      // edge case: remove root (maybe unnecessary)
+      // if (value === this.root.data) {
+      //   ??
+      // } else {
+      //   this.root = this.deleteHelper(value, this.root);
+      // }
+
+      this.root = this.deleteHelper(value, this.root);
+    }
+  }
+
+  deleteHelper(value, current) {
+    if (value === current.data) {
+      // 1: trying to delete leaf node -> becomes null
+      if (current.left === null && current.right === null) {
+        return null;
+      }
+
+      // 2: trying to delete node with 1 child
+      //      replace it with it's child (maintains BST property)
+      else if (current.left === null) {
+        current = current.right;
+      } else if (current.right === null) {
+        current = current.left;
+      }
+
+      // 3: trying to delete node with 2 children
+      //      find the "next biggest" -> of node's right subtree, navigate left
+      //      until node.left = null -> that value becomes the new
+      else {
+        let replacement = current.right;
+        while (replacement.left !== null) {
+          replacement = replacement.left;
+        }
+        const newValue = replacement.data;
+        this.delete(newValue);
+        current.data = newValue;
+      }
+
+      this.size--;
+    }
+
+    // haven't found it, keep navigating based on BST property
+    else {
+      if (value < current.data) {
+        current.left = this.deleteHelper(value, current.left);
+      } else {
+        current.right = this.deleteHelper(value, current.right);
+      }
+    }
+
+    return current;
+  }
 
   /**
-   * Returns node with given value (assumes value already in tree)
+   * Returns whether given value is in tree or not
+   */
+  contains(value) {
+    return this.containsHelper(value, this.root);
+  }
+
+  containsHelper(value, current) {
+    // base case: null root or navigated to null child (value not present)
+    if (current === null) {
+      return false;
+    } else if (value === current.data) {
+      return true;
+    }
+
+    // not found, continue searching
+    if (value < current.data) {
+      return this.containsHelper(value, current.left);
+    } else {
+      return this.containsHelper(value, current.right);
+    }
+  }
+
+  /**
+   * Returns node with given value, else null if not in tree
    */
   find(value) {
+    if (!this.contains(value)) return null;
+
     return this.findHelper(value, this.root);
   }
 

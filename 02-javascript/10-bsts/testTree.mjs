@@ -41,14 +41,29 @@ const testInsert = () => {
   tree.prettyPrint(tree.root);
 };
 
-const testFind = () => {
-  const data = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
-  const tree = new Tree(data);
-  console.log(tree);
+const testDelete = () => {
+  // [1, 3, 4, 5, 7, 8, 9, 23, 67, 324, 6345]
+  const tree = setUpBasicTreeStatic();
+  tree.delete(8);
   tree.prettyPrint(tree.root);
-  // console.log(tree.find(8));
-  // console.log(tree.find(1));
-  // console.log(tree.find(67));
+};
+
+const testContains = () => {
+  // [1, 3, 4, 5, 7, 8, 9, 23, 67, 324, 6345]
+  const tree = setUpBasicTreeStatic();
+  console.log(tree.contains(1));
+  console.log(tree.contains(8));
+  console.log(tree.contains(6345));
+  console.log(tree.contains(20));
+};
+
+const testFind = () => {
+  // [1, 3, 4, 5, 7, 8, 9, 23, 67, 324, 6345]
+  const tree = setUpBasicTreeStatic();
+  console.log(tree.find(20));
+  console.log(tree.find(8));
+  console.log(tree.find(1));
+  console.log(tree.find(67));
   console.log(tree.find(6345));
 };
 
@@ -131,8 +146,9 @@ const testDepth = () => {
 };
 
 // testBuildTree();
-testInsert();
-// testDelete();
+// testInsert();
+testDelete();
+// testContains();
 // testFind();
 // testLevelOrder();
 // testLevelOrderCallback();
