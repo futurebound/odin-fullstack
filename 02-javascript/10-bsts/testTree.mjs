@@ -2,11 +2,22 @@
 
 import Tree from './Tree.mjs';
 
+const BASIC_TREE_SIZE = 10;
+
 // UTILITY FUNCTION
-const setUpBasicTree = () => {
+const setUpBasicTreeStatic = () => {
   const data = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
   const tree = new Tree(data);
-  // console.log(tree);
+  tree.prettyPrint(tree.root);
+  return tree;
+};
+
+const setUpBasicTreeRandom = () => {
+  const data = [];
+  for (let i = 0; i < BASIC_TREE_SIZE; i++) {
+    data.push(Math.floor(Math.random() * 100));
+  }
+  const tree = new Tree(data);
   tree.prettyPrint(tree.root);
   return tree;
 };
@@ -15,6 +26,18 @@ const testBuildTree = () => {
   const data = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
   const tree = new Tree(data);
   console.log(tree);
+  tree.prettyPrint(tree.root);
+};
+
+const testInsert = () => {
+  const tree = setUpBasicTreeRandom();
+  tree.insert(2);
+  tree.prettyPrint(tree.root);
+  tree.insert(101);
+  tree.prettyPrint(tree.root);
+  tree.insert(102);
+  tree.prettyPrint(tree.root);
+  tree.insert(103);
   tree.prettyPrint(tree.root);
 };
 
@@ -108,6 +131,8 @@ const testDepth = () => {
 };
 
 // testBuildTree();
+testInsert();
+// testDelete();
 // testFind();
 // testLevelOrder();
 // testLevelOrderCallback();
@@ -115,7 +140,9 @@ const testDepth = () => {
 // testPreOrderCallback();
 // testInOrder();
 // testInOrderCallback();
-testPostOrder();
-testPostOrderCallback();
+// testPostOrder();
+// testPostOrderCallback();
 // testHeight();
 // testDepth();
+// testIsBalanced();
+// testRebalance();

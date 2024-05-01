@@ -52,7 +52,37 @@ class Tree {
   /**
    * Inserts the given value into the BST.
    */
-  insert(value) {}
+  insert(value) {
+    if (this.root === null) {
+      this.root = buildTree([value]);
+    } else {
+      // x = change(x) pattern
+      this.root = this.insertHelper(value, this.root);
+    }
+  }
+
+  insertHelper(value, current) {
+    // base case: hit a leaf node
+    if (current.left === null && current.right === null) {
+      if (value < current.data) {
+        current.left = new TreeNode(value);
+      } else {
+        current.right = new TreeNode(value);
+      }
+      this.size++;
+      // return current;
+
+      // recursive case: NOT a leaf
+    } else {
+      if (value < current.data) {
+        current.left = this.insertHelper(value, current.left);
+      } else {
+        current.right = this.insertHelper(value, current.right);
+      }
+    }
+
+    return current;
+  }
 
   /**
    * Deletes the given value (assumes given value already in tree)
@@ -236,6 +266,7 @@ class Tree {
   // TODO
   rebalance() {
     if (!this.isBalanced()) {
+      this.size = 0;
       const data = inOrder();
       this._root = this.buildTree(data);
     }
