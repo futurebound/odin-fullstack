@@ -30,23 +30,24 @@ const testFind = () => {
 };
 
 const testLevelOrder = () => {
-  const data = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
-  const tree = new Tree(data);
-  tree.prettyPrint(tree.root);
+  const tree = setUpBasicTree();
   console.log(tree.levelOrder());
 };
 
+const testLevelOrderCallback = () => {
+  const tree = setUpBasicTree();
+  tree.levelOrder((node) => {
+    console.log(node.data);
+  });
+};
+
 const testPreOrder = () => {
-  const data = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
-  const tree = new Tree(data);
-  tree.prettyPrint(tree.root);
+  const tree = setUpBasicTree();
   console.log(tree.preOrder());
 };
 
 const testPreOrderCallback = () => {
-  const data = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
-  const tree = new Tree(data);
-  tree.prettyPrint(tree.root);
+  const tree = setUpBasicTree();
   tree.preOrder((node) => {
     console.log(node.data);
   });
@@ -92,15 +93,19 @@ const testDepth = () => {
   const tree = setUpBasicTree();
   console.log('tree setup, now testing depth(node)');
   console.log(`depth of root = ${tree.depth(tree.root)}`);
-  console.log(`depth of 1 down = ${tree.depth(tree.root.left)}`);
+  console.log(`depth of 4 = ${tree.depth(tree.root.left)}`);
+  console.log(`depth of 3 = ${tree.depth(tree.root.left.left.right)}`);
 };
 
 // testBuildTree();
 // testFind();
-// testLevelOrder();
+testLevelOrder();
+testLevelOrderCallback();
 // testPreOrder();
 // testPreOrderCallback();
 // testInOrder();
+// testInOrderCallback();
 // testPostOrder();
-testHeight();
-testDepth();
+// testPostOrderCallback();
+// testHeight();
+// testDepth();

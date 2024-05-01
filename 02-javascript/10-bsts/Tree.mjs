@@ -81,7 +81,7 @@ class Tree {
   }
 
   levelOrder(callback = null) {
-    if (this.size <= 0) return [];
+    if (this.size <= 0) return 'tree is empty';
 
     let output = [];
     let queue = new Queue();
@@ -91,11 +91,15 @@ class Tree {
       if (node !== null) {
         queue.enqueue(node.left);
         queue.enqueue(node.right);
-        output.push(node.data);
+        if (callback === null) {
+          output.push(node.data);
+        } else {
+          callback(node);
+        }
       }
     }
 
-    return output;
+    if (callback === null) return output;
   }
 
   preOrder(callback = null) {
