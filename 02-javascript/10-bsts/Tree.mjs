@@ -342,15 +342,18 @@ class Tree {
     const leftHeight = this.height(this.root.left);
     const rightHeight = this.height(this.root.right);
     const difference = Math.abs(leftHeight - rightHeight);
-    return difference > 1;
+    console.log(
+      `leftHeight=${leftHeight} rightHeight=${rightHeight} diff=${difference}`
+    );
+    return difference <= 1;
   }
 
   // TODO
   rebalance() {
     if (!this.isBalanced()) {
       this.size = 0;
-      const data = inOrder();
-      this._root = this.buildTree(data);
+      const data = this.inOrder();
+      this.root = this.buildTree(data);
     }
   }
 

@@ -5,14 +5,14 @@ import Tree from './Tree.mjs';
 const BASIC_TREE_SIZE = 10;
 
 // UTILITY FUNCTION
-const setUpBasicTreeStatic = () => {
+const setUpStaticTree = () => {
   const data = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
   const tree = new Tree(data);
   tree.prettyPrint(tree.root);
   return tree;
 };
 
-const setUpBasicTreeRandom = () => {
+const setUpRandomTree = () => {
   const data = [];
   for (let i = 0; i < BASIC_TREE_SIZE; i++) {
     data.push(Math.floor(Math.random() * 100));
@@ -30,7 +30,7 @@ const testBuildTree = () => {
 };
 
 const testInsert = () => {
-  const tree = setUpBasicTreeRandom();
+  const tree = setUpRandomTree();
   tree.insert(2);
   tree.prettyPrint(tree.root);
   tree.insert(101);
@@ -43,14 +43,14 @@ const testInsert = () => {
 
 const testDelete = () => {
   // [1, 3, 4, 5, 7, 8, 9, 23, 67, 324, 6345]
-  const tree = setUpBasicTreeStatic();
+  const tree = setUpStaticTree();
   tree.delete(8);
   tree.prettyPrint(tree.root);
 };
 
 const testContains = () => {
   // [1, 3, 4, 5, 7, 8, 9, 23, 67, 324, 6345]
-  const tree = setUpBasicTreeStatic();
+  const tree = setUpStaticTree();
   console.log(tree.contains(1));
   console.log(tree.contains(8));
   console.log(tree.contains(6345));
@@ -59,7 +59,7 @@ const testContains = () => {
 
 const testFind = () => {
   // [1, 3, 4, 5, 7, 8, 9, 23, 67, 324, 6345]
-  const tree = setUpBasicTreeStatic();
+  const tree = setUpStaticTree();
   console.log(tree.find(20));
   console.log(tree.find(8));
   console.log(tree.find(1));
@@ -68,48 +68,48 @@ const testFind = () => {
 };
 
 const testLevelOrder = () => {
-  const tree = setUpBasicTree();
+  const tree = setUpStaticTree();
   console.log(tree.levelOrder());
 };
 
 const testLevelOrderCallback = () => {
-  const tree = setUpBasicTree();
+  const tree = setUpStaticTree();
   tree.levelOrder((node) => {
     console.log(node.data);
   });
 };
 
 const testPreOrder = () => {
-  const tree = setUpBasicTree();
+  const tree = setUpStaticTree();
   console.log(tree.preOrder());
 };
 
 const testPreOrderCallback = () => {
-  const tree = setUpBasicTree();
+  const tree = setUpStaticTree();
   tree.preOrder((node) => {
     console.log(node.data);
   });
 };
 
 const testInOrder = () => {
-  const tree = setUpBasicTree();
+  const tree = setUpStaticTree();
   console.log(tree.inOrder());
 };
 
 const testInOrderCallback = () => {
-  const tree = setUpBasicTree();
+  const tree = setUpStaticTree();
   tree.inOrder((node) => {
     console.log(node.data);
   });
 };
 
 const testPostOrder = () => {
-  const tree = setUpBasicTree();
+  const tree = setUpStaticTree();
   console.log(tree.postOrder());
 };
 
 const testPostOrderCallback = () => {
-  const tree = setUpBasicTree();
+  const tree = setUpStaticTree();
   tree.postOrder((node) => {
     console.log(node.data);
   });
@@ -133,21 +133,26 @@ const testHeight = () => {
   tree.prettyPrint(tree.root);
   console.log(`height = ${tree.height(tree.root)}`);
 
-  tree = setUpBasicTree();
+  tree = setUpStaticTree();
   console.log(`height = ${tree.height(tree.root)}`);
 };
 
 const testDepth = () => {
-  const tree = setUpBasicTree();
+  const tree = setUpStaticTree();
   console.log('tree setup, now testing depth(node)');
   console.log(`depth of root = ${tree.depth(tree.root)}`);
   console.log(`depth of 4 = ${tree.depth(tree.root.left)}`);
   console.log(`depth of 3 = ${tree.depth(tree.root.left.left.right)}`);
 };
 
+const testDriver = () => {
+  const tree = setUpRandomTree();
+  console.log(tree.isBalanced());
+};
+
 // testBuildTree();
 // testInsert();
-testDelete();
+// testDelete();
 // testContains();
 // testFind();
 // testLevelOrder();
@@ -162,3 +167,4 @@ testDelete();
 // testDepth();
 // testIsBalanced();
 // testRebalance();
+testDriver();
