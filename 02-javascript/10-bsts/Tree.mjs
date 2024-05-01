@@ -80,6 +80,11 @@ class Tree {
     }
   }
 
+  /**
+   * Performs level-order traversal with optional callback.
+   * If callback provided, provides each node as argument to callback.
+   * Else returns an array with level-order values.
+   */
   levelOrder(callback = null) {
     if (this.size <= 0) return 'tree is empty';
 
@@ -102,6 +107,11 @@ class Tree {
     if (callback === null) return output;
   }
 
+  /**
+   * Performs pre-order traversal with optional callback.
+   * If callback provided, provides each node as argument to callback.
+   * Else returns an array with pre-order values.
+   */
   preOrder(callback = null) {
     let output = [];
     this.preOrderTraversal(this.root, output, callback);
@@ -111,7 +121,6 @@ class Tree {
   preOrderTraversal(node, array, callback = null) {
     if (node !== null) {
       if (callback !== null) {
-        // console.log(node);
         callback(node);
       } else {
         array.push(node.data);
@@ -122,31 +131,52 @@ class Tree {
     }
   }
 
+  /**
+   * Performs in-order traversal with optional callback.
+   * If callback provided, provides each node as argument to callback.
+   * Else returns an array with in-order values.
+   */
   inOrder(callback = null) {
     let output = [];
-    this.inOrderTraversal(output, this.root);
-    return output;
+    this.inOrderTraversal(this.root, output, callback);
+    if (callback === null) return output;
   }
 
-  inOrderTraversal(array, node, callback = null) {
+  inOrderTraversal(node, array, callback = null) {
     if (node !== null) {
-      this.inOrderTraversal(array, node.left);
-      array.push(node.data);
-      this.inOrderTraversal(array, node.right);
+      this.inOrderTraversal(node.left, array, callback);
+
+      if (callback !== null) {
+        callback(node);
+      } else {
+        array.push(node.data);
+      }
+
+      this.inOrderTraversal(node.right, array, callback);
     }
   }
 
+  /**
+   * Performs post-order traversal with optional callback.
+   * If callback provided, provides each node as argument to callback.
+   * Else returns an array with post-order values.
+   */
   postOrder(callback = null) {
     let output = [];
-    this.postOrderTraversal(output, this.root);
-    return output;
+    this.postOrderTraversal(this.root, output, callback);
+    if (callback === null) return output;
   }
 
-  postOrderTraversal(array, node, callback = null) {
+  postOrderTraversal(node, array, callback = null) {
     if (node !== null) {
-      this.postOrderTraversal(array, node.left);
-      this.postOrderTraversal(array, node.right);
-      array.push(node.data);
+      this.postOrderTraversal(node.left, array, callback);
+      this.postOrderTraversal(node.right, array, callback);
+
+      if (callback !== null) {
+        callback(node);
+      } else {
+        array.push(node.data);
+      }
     }
   }
 

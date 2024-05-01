@@ -54,17 +54,27 @@ const testPreOrderCallback = () => {
 };
 
 const testInOrder = () => {
-  const data = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
-  const tree = new Tree(data);
-  tree.prettyPrint(tree.root);
+  const tree = setUpBasicTree();
   console.log(tree.inOrder());
 };
 
+const testInOrderCallback = () => {
+  const tree = setUpBasicTree();
+  tree.inOrder((node) => {
+    console.log(node.data);
+  });
+};
+
 const testPostOrder = () => {
-  const data = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
-  const tree = new Tree(data);
-  tree.prettyPrint(tree.root);
+  const tree = setUpBasicTree();
   console.log(tree.postOrder());
+};
+
+const testPostOrderCallback = () => {
+  const tree = setUpBasicTree();
+  tree.postOrder((node) => {
+    console.log(node.data);
+  });
 };
 
 const testHeight = () => {
@@ -99,13 +109,13 @@ const testDepth = () => {
 
 // testBuildTree();
 // testFind();
-testLevelOrder();
-testLevelOrderCallback();
+// testLevelOrder();
+// testLevelOrderCallback();
 // testPreOrder();
 // testPreOrderCallback();
 // testInOrder();
 // testInOrderCallback();
-// testPostOrder();
-// testPostOrderCallback();
+testPostOrder();
+testPostOrderCallback();
 // testHeight();
 // testDepth();
