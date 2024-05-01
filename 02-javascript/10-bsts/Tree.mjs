@@ -70,15 +70,21 @@ class Tree {
 
   preOrder(callback = null) {
     let output = [];
-    this.preOrderTraversal(output, this.root);
-    return output;
+    this.preOrderTraversal(this.root, output, callback);
+    if (callback === null) return output;
   }
 
-  preOrderTraversal(array, node, callback = null) {
+  preOrderTraversal(node, array, callback = null) {
     if (node !== null) {
-      array.push(node.data);
-      this.preOrderTraversal(node.left);
-      this.preOrderTraversal(node.right);
+      if (callback !== null) {
+        // console.log(node);
+        callback(node);
+      } else {
+        array.push(node.data);
+      }
+
+      this.preOrderTraversal(node.left, array, callback);
+      this.preOrderTraversal(node.right, array, callback);
     }
   }
 
@@ -90,9 +96,9 @@ class Tree {
 
   inOrderTraversal(array, node, callback = null) {
     if (node !== null) {
-      this.inOrderTraversal(node.left);
+      this.inOrderTraversal(array, node.left);
       array.push(node.data);
-      this.inOrderTraversal(node.right);
+      this.inOrderTraversal(array, node.right);
     }
   }
 
@@ -104,15 +110,57 @@ class Tree {
 
   postOrderTraversal(array, node, callback = null) {
     if (node !== null) {
-      this.postOrderTraversal(node.left);
-      this.postOrderTraversal(node.right);
+      this.postOrderTraversal(array, node.left);
+      this.postOrderTraversal(array, node.right);
       array.push(node.data);
     }
   }
 
+  // Returns the given node's height (# of edges in longest path from given
+  //  node to a leaf node)
+  // If a given node is null, will return 0.
+  // A leaf node will return 1
+  height(node) {
+    if (node === null) {
+      return 0;
+    }
+
+    // console.log(node);
+    const leftHeight = 1 + this.height(node.left);
+    const rightHeight = 1 + this.height(node.right);
+    return Math.max(leftHeight, rightHeight);
+  }
+
+  /**
+   * Returns the given node's depth (# edges from given node to tree's root)
+   */
+  depth(node) {
+    // tree deduped, so can tell by comparing node.data equality
+    return this.preOrder;
+  }
+
+  depthHelper(node, currentDepth) {}
+
+  /**
+   * @returns true if difference in height of left & right subtrees is <= 1
+   */
+  isBalanced() {
+    if (this.root === null) {
+      return true;
+    }
+
+    const leftHeight = this.height(this.root.left);
+    const rightHeight = this.height(this.root.right);
+    const difference = Math.abs(leftHeight - rightHeight);
+    return difference > 1;
+  }
+
+  // TODO
   rebalance() {
-    const data = inOrder();
-    this._root = this.buildTree(data);
+    if (!this.isBalanced()) {
+      const data = inOrder();
+      this._root = this.buildTree(data);
+    }
   }
 
   prettyPrint(node, prefix = '', isLeft = true) {
