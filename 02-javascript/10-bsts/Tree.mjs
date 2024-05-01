@@ -36,6 +36,37 @@ class Tree {
     return node;
   }
 
+  /**
+   * Inserts the given value into the BST.
+   */
+  insert(value) {}
+
+  /**
+   * Deletes the given value (assumes given value already in tree)
+   */
+  delete(value) {}
+
+  /**
+   * Returns node with given value (assumes value already in tree)
+   */
+  find(value) {
+    return this.findHelper(value, this.root);
+  }
+
+  findHelper(value, node) {
+    if (node !== null) {
+      if (value === node.data) {
+        return node;
+      }
+
+      if (value < node.data) {
+        return this.findHelper(value, node.left);
+      } else {
+        return this.findHelper(value, node.right);
+      }
+    }
+  }
+
   // turn array into balanced binary tree full of Nodes
   buildTree(array) {
     if (array.length <= 0) return null;

@@ -9,6 +9,17 @@ const testBuildTree = () => {
   tree.prettyPrint(tree.root);
 };
 
+const testFind = () => {
+  const data = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
+  const tree = new Tree(data);
+  console.log(tree);
+  tree.prettyPrint(tree.root);
+  // console.log(tree.find(8));
+  // console.log(tree.find(1));
+  // console.log(tree.find(67));
+  console.log(tree.find(6345));
+};
+
 const testLevelOrder = () => {
   const data = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
   const tree = new Tree(data);
@@ -54,9 +65,10 @@ const testHeight = () => {
 };
 
 // testBuildTree();
+testFind();
 // testLevelOrder();
 // testPreOrder();
-testPreOrderCallback();
+// testPreOrderCallback();
 // testInOrder();
 // testPostOrder();
 // testHeight();
