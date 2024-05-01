@@ -147,7 +147,26 @@ const testDepth = () => {
 
 const testDriver = () => {
   const tree = setUpRandomTree();
-  console.log(tree.isBalanced());
+  console.log(`isBalanced? ${tree.isBalanced()}`);
+  console.log(`level-order: ${tree.levelOrder()}`);
+  console.log(`pre-order: ${tree.preOrder()}`);
+  console.log(`in-order: ${tree.inOrder()}`);
+  console.log(`post-order: ${tree.postOrder()}`);
+  console.log('unbalancing tree with adds > 100');
+  tree.insert(101);
+  tree.prettyPrint(tree.root);
+  console.log(`isBalanced? ${tree.isBalanced()}`);
+  tree.insert(102);
+  tree.prettyPrint(tree.root);
+  console.log(`isBalanced? ${tree.isBalanced()}`);
+  console.log('rebalancing tree ...');
+  tree.rebalance();
+  tree.prettyPrint(tree.root);
+  console.log(`isBalanced? ${tree.isBalanced()}`);
+  console.log(`level-order: ${tree.levelOrder()}`);
+  console.log(`pre-order: ${tree.preOrder()}`);
+  console.log(`in-order: ${tree.inOrder()}`);
+  console.log(`post-order: ${tree.postOrder()}`);
 };
 
 // testBuildTree();

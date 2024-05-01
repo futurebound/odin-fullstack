@@ -342,9 +342,9 @@ class Tree {
     const leftHeight = this.height(this.root.left);
     const rightHeight = this.height(this.root.right);
     const difference = Math.abs(leftHeight - rightHeight);
-    console.log(
-      `leftHeight=${leftHeight} rightHeight=${rightHeight} diff=${difference}`
-    );
+    // console.log(
+    //   `leftHeight=${leftHeight} rightHeight=${rightHeight} diff=${difference}`
+    // );
     return difference <= 1;
   }
 
