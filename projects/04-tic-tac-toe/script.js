@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 function Gameboard() {
   const rows = 3;
@@ -19,7 +19,7 @@ function Gameboard() {
 
     return {
       addMove,
-      getValue
+      getValue,
     };
   }
 
@@ -27,7 +27,7 @@ function Gameboard() {
   for (let row = 0; row < rows; row++) {
     board[row] = [];
     for (let col = 0; col < columns; col++) {
-      board[row].push(Cell())
+      board[row].push(Cell());
     }
   }
 
@@ -40,7 +40,7 @@ function Gameboard() {
   };
 
   const makeMove = (row, col, player) => {
-    const targetCell = board[row][col]
+    const targetCell = board[row][col];
     if (targetCell.getValue() === 0) {
       targetCell.addMove(player);
       moves++;
@@ -55,9 +55,11 @@ function Gameboard() {
     // rows
     for (let row = 0; row < rows; row++) {
       const currentRow = board[row];
-      if (currentRow[0].getValue() !== 0
-        && currentRow[0].getValue() === currentRow[1].getValue()
-        && currentRow[1].getValue() === currentRow[2].getValue()) {
+      if (
+        currentRow[0].getValue() !== 0 &&
+        currentRow[0].getValue() === currentRow[1].getValue() &&
+        currentRow[1].getValue() === currentRow[2].getValue()
+      ) {
         gameIsOver = true;
         return currentRow[0].getValue();
       }
@@ -65,24 +67,29 @@ function Gameboard() {
 
     // cols
     for (let col = 0; col < columns; col++) {
-      if (board[0][col].getValue() != 0
-        && board[0][col].getValue() === board[1][col].getValue()
-        && board[1][col].getValue() === board[2][col].getValue()) {
+      if (
+        board[0][col].getValue() != 0 &&
+        board[0][col].getValue() === board[1][col].getValue() &&
+        board[1][col].getValue() === board[2][col].getValue()
+      ) {
         gameIsOver = true;
         return board[0][col].getValue();
       }
     }
 
     // diagonals
-    if (board[0][0].getValue() !== 0
-      && board[0][0].getValue() === board[1][1].getValue()
-      && board[1][1].getValue() === board[2][2].getValue()) {
+    if (
+      board[0][0].getValue() !== 0 &&
+      board[0][0].getValue() === board[1][1].getValue() &&
+      board[1][1].getValue() === board[2][2].getValue()
+    ) {
       gameIsOver = true;
       return board[0][0].getValue();
-
-    } else if (board[2][0].getValue() !== 0
-      && board[2][0].getValue() === board[1][1].getValue()
-      && board[1][1].getValue() === board[0][2].getValue()) {
+    } else if (
+      board[2][0].getValue() !== 0 &&
+      board[2][0].getValue() === board[1][1].getValue() &&
+      board[1][1].getValue() === board[0][2].getValue()
+    ) {
       gameIsOver = true;
       return board[2][0].getValue();
     }
@@ -101,24 +108,21 @@ function Gameboard() {
     getGameOver,
     printBoard,
     makeMove,
-    checkGameEnd
+    checkGameEnd,
   };
 }
 
-function GameController(
-  playerOneName = "P1",
-  playerTwoName = "P2"
-) {
+function GameController(playerOneName = 'P1', playerTwoName = 'P2') {
   const board = Gameboard();
   const players = [
     {
       name: playerOneName,
-      token: 1
+      token: 1,
     },
     {
       name: playerTwoName,
-      token: 2
-    }
+      token: 2,
+    },
   ];
 
   let activePlayer = players[0];
@@ -146,13 +150,13 @@ function GameController(
       console.log(`${players[1].name} has won the game!`);
       return `${players[1].name} has won the game!`;
     }
-  }
+  };
 
   const playRound = (row, col) => {
     board.makeMove(row, col, getActivePlayer().token);
 
     // check for winner
-    const winner = board.checkGameEnd()
+    const winner = board.checkGameEnd();
     if (winner < 0) {
       switchPlayerTurn();
       printRoundInfo();
@@ -170,21 +174,21 @@ function GameController(
     printGameEnd,
     getBoard: board.getBoard,
     getGameOver: board.getGameOver,
-    checkGameEnd: board.checkGameEnd
+    checkGameEnd: board.checkGameEnd,
   };
 }
 
 function ScreenController() {
   let game = GameController();
 
-  const modal = document.querySelector(".modal");
-  const openModal = document.querySelectorAll(".open-button");
-  const startButton = document.querySelector(".start-button");
+  const modal = document.querySelector('.modal');
+  const openModal = document.querySelectorAll('.open-button');
+  const startButton = document.querySelector('.start-button');
 
-  const turnDiv = document.querySelector(".turn");
-  const boardDiv = document.querySelector(".board");
-  const winnerModal = document.querySelector(".winner-modal");
-  const winnerDisplay = document.querySelector(".winner-display");
+  const turnDiv = document.querySelector('.turn');
+  const boardDiv = document.querySelector('.board');
+  const winnerModal = document.querySelector('.winner-modal');
+  const winnerDisplay = document.querySelector('.winner-display');
 
   const updateScreen = () => {
     boardDiv.replaceChildren(); // clear boardstate
@@ -196,73 +200,75 @@ function ScreenController() {
     // console.log(board)
     board.forEach((row, rowIndex) => {
       row.forEach((cell, colIndex) => {
-        const cellButton = document.createElement("button");
+        const cellButton = document.createElement('button');
         cellButton.dataset.row = rowIndex;
         cellButton.dataset.column = colIndex;
-        cellButton.classList.add("cell", "active");
+        cellButton.classList.add('cell', 'active');
 
         const cellValue = cell.getValue();
         if (cellValue > 0) {
           if (cellValue === 1) {
-            cellButton.textContent = "X";
-            cellButton.classList.add("player-one");
+            cellButton.textContent = 'X';
+            cellButton.classList.add('player-one');
           } else {
-            cellButton.textContent = "O";
-            cellButton.classList.add("player-two");
+            cellButton.textContent = 'O';
+            cellButton.classList.add('player-two');
           }
           // cellButton.textContent = cellValue === 1 ? "X" : "O";
-          cellButton.classList.replace("active", "inactive")
+          cellButton.classList.replace('active', 'inactive');
         }
 
         // only add event listeners to active buttons
-        if (cellButton.classList.contains("active")) {
-          cellButton.addEventListener("click", (e) => {
+        if (cellButton.classList.contains('active')) {
+          cellButton.addEventListener('click', (e) => {
             const selectedCell = e.target;
-            console.log(selectedCell)
+            console.log(selectedCell);
             // console.log(selectedCell.dataset.row)
-            game.playRound(selectedCell.dataset.row, selectedCell.dataset.column);
+            game.playRound(
+              selectedCell.dataset.row,
+              selectedCell.dataset.column
+            );
             updateScreen();
           });
         }
 
         boardDiv.appendChild(cellButton);
-      })
+      });
     });
 
     displayGameOver();
-  }
+  };
 
   const displayGameOver = () => {
-    const winner = game.checkGameEnd()
+    const winner = game.checkGameEnd();
     if (winner > 0) {
       winnerModal.showModal();
       winnerDisplay.textContent = game.printGameEnd(winner);
     }
-  }
+  };
 
-  const resetScreen = (playerOneName = "p11", playerTwoName = "p22") => {
+  const resetScreen = (playerOneName = 'p11', playerTwoName = 'p22') => {
     game = GameController(playerOneName, playerTwoName);
     updateScreen();
-  }
+  };
 
-  openModal.forEach(openButton => {
-    openButton.addEventListener("click", () => {
+  openModal.forEach((openButton) => {
+    openButton.addEventListener('click', () => {
       modal.showModal();
     });
-  })
-  
-  startButton.addEventListener("click", (e) => {
+  });
+
+  startButton.addEventListener('click', (e) => {
     e.preventDefault();
-    const playerOneName = document.querySelector("#player-one-name").value;
-    const playerTwoName = document.querySelector("#player-two-name").value;
+    const playerOneName = document.querySelector('#player-one-name').value;
+    const playerTwoName = document.querySelector('#player-two-name').value;
     resetScreen(playerOneName, playerTwoName);
     modal.close();
     winnerModal.close();
   });
 
   // initial screen by triggering user name input
-  document.addEventListener("DOMContentLoaded", modal.showModal());
+  document.addEventListener('DOMContentLoaded', modal.showModal());
 }
-
 
 ScreenController();
